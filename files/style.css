@@ -1,9 +1,11 @@
 /* GLOBAL TAG DECLARATIONS */
 @import url(reset.css);
 
+/* make the body layout at the center of page */
+
 body {
 /* background: #242D36 url(images/background.jpg) no-repeat 0 180px; */
-    /* width: 1200px; */
+    /* width: 1200px;*/
     background: #242d36;
     color: #000;
     line-height: 1.4;
@@ -163,14 +165,15 @@ h1 {
 }
 
 #head_photo {
-    padding: 0px 10px 0 0;
-    height: 260px;
-    float: left;
+    border-radius: 8px;
+    /* padding: 30px 20px 0 0; */
+    height: 250px;
+    float: right;
 }
 
 #person_intro {
     padding: 0px 0 0 10px;
-    width : 600px;
+    width : 650px;
     float:left;
 }
 
