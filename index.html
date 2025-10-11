@@ -1,346 +1,459 @@
-<!DOCTYPE html>
-<html dir="LTR" lang="en">
-
+<!doctype html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Jiang Guo's Homepage</title>
-<link rel="stylesheet" media="all" type="text/css" href="./files/style.css">
-<link rel="stylesheet" media="all" type="text/css" href="./files/style.css" />
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-var script = document.createElement('script');
-script.src = gaJsHost + "google-analytics.com/ga.js";
-script.type = 'text/javascript';
-document.head.appendChild(script);
-</script>
-<script src="./files/ga.js" type="text/javascript"></script>
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-36401972-1");
-pageTracker._trackPageview();
-} catch(err) {}
-</script>
-</script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title id="meta-title">Academic Homepage</title>
+  <meta name="description" id="meta-description" content="Research on LLMs, RAG, agents, and applied NLP. Publications, services, and contact." />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" id="og-title" content="Academic Homepage" />
+  <meta property="og:description" id="og-description" content="Research on LLMs, RAG, agents, and applied NLP." />
+  <meta property="og:image" content="/assets/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="canonical" id="canonical" href="" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>📄</text></svg>">
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111827;  /* gray-900 */
+      --muted: #374151; /* gray-700 */
+      --link: #1d4ed8;  /* indigo-700 */
+      --rule: #e5e7eb;  /* gray-200 */
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg:#0b0d12; --text:#e5e7eb; --muted:#9aa4b2; --link:#93c5fd; --rule:#1f2937; }
+    }
+    [data-theme="light"] { --bg:#ffffff; --text:#111827; --muted:#374151; --link:#1d4ed8; --rule:#e5e7eb; }
+
+    html { scroll-behavior: smooth; }
+    html, body { height: 100%; }
+    body { margin:0; background:var(--bg); color:var(--text); font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container { width: min(1000px, 92vw); margin: 0 auto; }
+    header.site { border-bottom: 1px solid var(--rule); }
+    .nav { display:flex; justify-content: space-between; align-items:center; padding: 18px 0; }
+    .brand { display:flex; gap:16px; align-items:center; }
+    .brand img { width:72px; height:72px; border-radius: 6px; object-fit: cover; }
+    .brand .name { font-weight:600; font-size: 1.6rem; letter-spacing: -0.01em; }
+    .brand .role { color: var(--muted); font-size: 0.95rem; font-weight: 400; }
+
+    .nav-links { display:flex; gap:24px; font-size: 0.95rem; }
+    .nav-links a { 
+      color: var(--text); 
+      font-weight: 500; 
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+    .nav-links a:hover { 
+      background-color: var(--rule); 
+      text-decoration: none;
+    }
+    .nav-links a.active { 
+      font-weight: 600; 
+      background-color: var(--rule);
+    }
+
+    main { padding: 22px 0 40px; }
+    h1, h2, h3 { font-weight: 600; margin: 0 0 12px; }
+    h1 { font-size: 1.75rem; margin-top: 32px; margin-bottom: 16px; }
+    h2 { font-size: 1.4rem; margin-top: 32px; margin-bottom: 16px; border-bottom: 1px solid var(--rule); padding-bottom: 8px; }
+    h3 { font-size: 1.1rem; margin-top: 24px; margin-bottom: 12px; }
+    p, ul { margin: 0 0 16px; }
+    ul { padding-left: 24px; }
+    li { margin-bottom: 8px; }
+
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
+
+    .meta { color: var(--muted); font-size: 0.98rem; }
+    .muted { color: var(--muted); }
+
+    .cta-row { display:flex; gap:8px; flex-wrap: wrap; margin: 4px 0 0; }
+    .btn { display:inline-block; border:1px solid var(--rule); padding:4px 8px; border-radius: 4px; text-decoration:none; font-size: 0.9rem; font-weight: 500; }
+
+    /* Single-column lists */
+    .pub-list { list-style: none; padding-left: 0; }
+    .pub-item { margin: 0 0 20px; }
+    .title { font-weight: 600; font-size: 1.02em; }
+    .authors b { font-weight: 600; }
+    .pill-row { display:inline-flex; gap:8px; flex-wrap: wrap; margin-left: 0px; }
+    .pill { border:1px solid var(--rule); border-radius: 4px; padding: 3px 6px; font-size: 0.85rem; text-decoration: none; font-weight: 500; }
+
+    .about-grid { display:grid; grid-template-columns: 1fr 280px; gap:30px; align-items:start; }
+    .about-grid img { max-width:100%; border-radius:6px; }
+    
+    .book-grid { display:grid; grid-template-columns: 150px 1fr; gap:16px; align-items:start; margin-bottom:20px; }
+    .book-cover { width:150px; height:auto; border-radius:6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .book-info { flex:1; }
+
+    footer { border-top: 1px solid var(--rule); padding: 16px 0 36px; margin-top: 24px; color: var(--muted); font-size: 0.95rem; }
+  </style>
 </head>
-
 <body>
-<ol id="nav">
-    <li><a class="selected" href="./index.html" title="Home">Home</a></li>
-    <li><a href="#pub" title="Papers">Papers</a></li>
-    <li><a href="#act" title="Services">Services</a></li>
-    <li><a href="#res" title="Miscellaneous">Misc</a></li>
-</ol>
+  <a class="sr-only" href="#content">Skip to content</a>
 
-<div id="wrapper">
+  <header class="site">
+    <div class="container nav">
+      <div class="brand">
+        <div>
+          <div class="name" id="name">Your Name</div>
+          <div class="role" id="role">Applied Scientist · Affiliation</div>
+          <div class="meta" id="contacts"></div>
+        </div>
+      </div>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#publications">Publications</a>
+        <a href="#books">Books</a>
+        <a href="#services">Services</a>
+      </nav>
+    </div>
+  </header>
 
-<h1 id="fff"><a href="http://people.csail.mit.edu/jiang_guo/" title="Jiang Guo&#39;s homepage">Jiang Guo (郭  江)</a></h1>
+  <main id="content" class="container">
+    <section id="about" aria-labelledby="about-title">
+      <div class="about-grid">
+        <div>
+          <p>I am currently a Senior Applied Scientist at <a href="https://aws.amazon.com/ai/agentic-ai/">AWS Agentic AI</a>. Previously, I was a Postdoctoral researcher at <a href="https://www.csail.mit.edu/">MIT CSAIL</a>, where I had the privilege of working with <a href="https://www.regina.csail.mit.edu/">Prof. Regina Barzilay</a>. I earned my Ph.D. from <a href="http://ir.hit.edu.cn/">SCIR lab</a> at Harbin Institute of Technology, under the supervision of <a href="http://ir.hit.edu.cn/~wanghaifeng/">Dr. Haifeng Wang</a> and <a href="http://ir.hit.edu.cn/~car/english.htm/">Prof. Wanxiang Che</a>, and was a visiting student at Johns Hopkins University, advised by <a href="http://www.cs.jhu.edu/~yarowsky/">Prof. David Yarowsky</a>.</p>
+          <p>My research interests span a broad spectrum of topics in natural language processing and machine learning. My earlier work focused on low-resource learning, with applications in cross-lingual, task, and domain transfer, as well as AI for chemical sciences. More recently, my work has centered on <b>large language models (LLMs)</b> and their industrial applications, including Post-Training (<a href="https://aws.amazon.com/bedrock/amazon-models/titan/">Amazon Titan LLMs</a>), Semantic Parsing (<a href="https://aws.amazon.com/quicksight/q/">Amazon Q in QuickSight</a>), Information Retrieval / RAG (<a href="https://aws.amazon.com/bedrock/knowledge-bases/">Amazon Bedrock Knowledge Base</a>), and Agent Memory Primitives (<a href="https://aws.amazon.com/bedrock/agentcore/">Amazon Bedrock AgentCore</a>).</p>
+        </div>
+        <div>
+          <img id="bio-photo" src="./files/bio-photo4.png" alt="Bio photo" loading="lazy" />
+        </div>
+      </div>
+    </section>
 
-<div id="content">
+    <section id="publications" aria-labelledby="pubs-title">
+      <h2 id="pubs-title">Recent Publications [<a href="https://scholar.google.com/citations?user=WiqWaE4AAAAJ&hl=en">Full Publications</a>]</h2>
+      <p>* <i>indicates authors with equal contribution.</i> † <i>indicates authors I've mentored.</i></p>
+      <ol class="pub-list" id="pubs-list"></ol>
+    </section>
 
-<div id="person_intro">
-<p>
-    <span style='margin-right:0.8em'><a href="mailto:jiangfeng1124@gmail.com"><img src="./files/logos/email.png" style="max-height:25px;"></a> </span>
-    <span style='margin-right:0.8em'><a href="https://scholar.google.com/citations?user=WiqWaE4AAAAJ&hl=en"><img src="./files/logos/gscholar.png" style="max-height:25px;"></a> </span>
-    <span style='margin-right:0.8em'><a href="https://github.com/jiangfeng1124"><img src="./files/logos/github.png" style="max-height:25px;"></a> </span>
-    <span style='margin-right:0.8em'><a href="https://twitter.com/jiangfeng1124"><img src="./files/logos/twitter.png" style="max-height:25px;"></a> </span>
-</p>
-<img id="head_photo" src="./files/bio-photo4.png" />
-<!-- <p><em>Welcome!</em></p> -->
-I am currently a Senior Applied Scientist at <a href="https://aws.amazon.com/ai/agentic-ai/">AWS Agentic AI</a>. Previously, I was a postdoctoral researcher at MIT CSAIL, where I had the privilege of working with <a href="https://www.regina.csail.mit.edu/">Prof. Regina Barzilay</a>.
-I earned my Ph.D. from the <a href="http://ir.hit.edu.cn/">SCIR lab</a> at Harbin Institute of Technology, under the supervision of <a href="http://ir.hit.edu.cn/~wanghaifeng/">Dr. Haifeng Wang</a> and <a href="http://ir.hit.edu.cn/~car/english.htm/">Prof. Wanxiang Che</a>. From 2014 to 2015, I was a visiting student at Johns Hopkins University's <a href="http://speak.clsp.jhu.edu/">CLSP</a>, collaborating with <a href="http://www.cs.jhu.edu/~yarowsky/">Prof. David Yarowsky</a>.
-<br/>
-<br/>
+    <section id="books" aria-labelledby="books-title">
+      <h2 id="books-title">Books</h2>
+      <ul id="books-list" class="meta"></ul>
+    </section>
 
-My research interests encompass a broad spectrum of topics in natural language processing and machine learning. My earlier work focused on low-resource learning, with applications in cross-lingual, task, and domain transfer (<a href="https://aclanthology.org/P15-1119.pdf">ACL15</a>, <a href="https://jiangfeng1124.github.io/papers/aaai2016-transdep.pdf">JAIR16</a>, <a href="https://arxiv.org/pdf/1809.02256.pdf">EMNLP18</a>, <a href="https://arxiv.org/pdf/1909.09279.pdf">EMNLP19a</a>, <a href="https://arxiv.org/pdf/1909.06775.pdf">EMNLP19b</a>), as well as AI for chemical sciences (<a href="https://pubs.acs.org/doi/10.1021/acs.jcim.1c00284">ChemBERT @JCIM21</a>, <a href="https://pubs.acs.org/doi/10.1021/acs.jcim.2c01480">MolScribe @JCIM23a</a>, <a href="https://pubs.acs.org/doi/10.1021/acs.jcim.3c00439">RxnScribe @JCIM23b</a>). More recently, my work has centered on large language models (LLMs) and their industrial applications, including Post-Training (<a href="https://aws.amazon.com/bedrock/amazon-models/titan/">Amazon Titan LLMs</a>), Text2SQL (<a href="https://aws.amazon.com/quicksight/q/">Amazon Q in QuickSight</a>), Retrieval-Augmented Generation (RAG) (<a href="https://aws.amazon.com/bedrock/knowledge-bases/">Amazon Bedrock Knowledge Base</a>), and Agent Primitives (<a href="https://aws.amazon.com/bedrock/agentcore/">Amazon Bedrock AgentCore</a>).
-<br/>
-</div>
+    <section id="services" aria-labelledby="services-title">
+      <h2 id="services-title">Services</h2>
+      <ul id="svc-academic" class="meta"></ul>
+    </section>
+  </main>
 
-<div id="clear"></div>
+  <footer>
+    <div class="container">
+      <small>Last updated <time id="last-updated"></time> · © <span id="copyright-year"></span> <span id="name-footer"></span></small>
+    </div>
+  </footer>
 
-<a name="pub"></a>
-<div id="publication">
+  <script id="schema-person" type="application/ld+json"></script>
 
-<!-- Publications -->
-<h1>Selected Papers [<a href="https://scholar.google.com/citations?user=WiqWaE4AAAAJ&hl=en">Google Scholar</a>]</h1>
+  <!-- ======= DATA (edit to match your details; order is preserved) ======= -->
+  <script>
+    const SITE_DATA = {
+      person: {
+        name: "Jiang Guo",
+        nativeName: "郭江",
+        role: "Senior Applied Scientist",
+        affiliation: "AWS Bedrock / Agentic AI",
+        background: "Previously: MIT CSAIL (Postdoc) | HIT (Ph.D.)",
+        email: "jiangfeng1124@gmail.com",
+        scholar: "https://scholar.google.com/citations?user=WiqWaE4AAAAJ&hl=en",
+        github: "https://github.com/jiangfeng1124",
+        x: "https://twitter.com/jiangfeng1124",
+        linkedin: "https://www.linkedin.com/in/jiang-guo-48080018/",
+        bioPhoto: "./files/bio-photo4.png"
+      },
+      publications: [
+        {
+          venue: "ACL Main 2025",
+          title: "On Synthetic Data Strategies for Domain-Specific Generative Retrieval",
+          authors: "Haoyang Wen<sup>†</sup>, <b>Jiang Guo</b>, Yi Zhang, Jiarong Jiang, Zhiguo Wang",
+          links: { pdf: "https://arxiv.org/pdf/2502.17957" },
+          bibtex: "@inproceedings{wen2025synthetic, title={On Synthetic Data Strategies for Domain-Specific Generative Retrieval}, author={Haoyang Wen and Jiang Guo and Yi Zhang and Jiarong Jiang and Zhiguo Wang}, booktitle={ACL}, year={2025} }"
+        },
+        {
+          venue: "NAACL Main 2025",
+          title: "You Only Read Once (YORO): Learning to Internalize Database Knowledge for Text-to-SQL",
+          authors: "Hideo Kobayashi<sup>†</sup>, Wuwei Lan, Peng Shi, Shuaichen Chang, <b>Jiang Guo</b>, Henghui Zhu, Zhiguo Wang, Patrick Ng",
+          links: { pdf: "https://arxiv.org/pdf/2409.12172" },
+          bibtex: "@inproceedings{kobayashi2025yoro, title={You Only Read Once (YORO): Learning to Internalize Database Knowledge for Text-to-SQL}, author={Hideo Kobayashi and Wuwei Lan and Peng Shi and Shuaichen Chang and Jiang Guo and Henghui Zhu and Zhiguo Wang and Patrick Ng}, booktitle={NAACL}, year={2025} }"
+        },
+        {
+          venue: "ACL Findings 2024",
+          title: "Propagation and Pitfalls: Reasoning-based Assessment of Knowledge Editing through Counterfactual Tasks",
+          authors: "Wenyue Hua*<sup>†</sup>, <b>Jiang Guo</b>*, Mingwen Dong, Henghui Zhu, Patrick Ng, Zhiguo Wang",
+          links: { pdf: "https://arxiv.org/pdf/2401.17585", code: "https://github.com/awslabs/ReCoE" },
+          bibtex: "@inproceedings{hua2024propagation, title={Propagation and Pitfalls: Reasoning-based Assessment of Knowledge Editing through Counterfactual Tasks}, author={Wenyue Hua and Jiang Guo and Mingwen Dong and Henghui Zhu and Patrick Ng and Zhiguo Wang}, booktitle={ACL Findings}, year={2024} }"
+        },
+        {
+          venue: "JCIM 2023",
+          title: "RxnScribe: A Sequence Generation Model for Reaction Diagram Parsing",
+          authors: "Yujie Qian, <b>Jiang Guo</b>, Zhengkai Tu, Connor W. Coley and Regina Barzilay",
+          links: { pdf: "https://pubs.acs.org/doi/10.1021/acs.jcim.3c00439", code: "https://github.com/thomas0809/RxnScribe", demo: "https://huggingface.co/spaces/yujieq/RxnScribe" },
+          bibtex: "@article{qian2023rxnscribe, title={RxnScribe: A Sequence Generation Model for Reaction Diagram Parsing}, author={Yujie Qian and Jiang Guo and Zhengkai Tu and Connor W. Coley and Regina Barzilay}, journal={JCIM}, year={2023} }"
+        },
+        {
+          venue: "JCIM 2023",
+          title: "MolScribe: Robust Molecular Structure Recognition with Image-to-Graph Generation",
+          authors: "Yujie Qian, <b>Jiang Guo</b>, Zhengkai Tu, Zhening Li, Connor W. Coley and Regina Barzilay",
+          links: { pdf: "https://pubs.acs.org/doi/10.1021/acs.jcim.2c01480", code: "https://github.com/thomas0809/MolScribe", demo: "https://huggingface.co/spaces/yujieq/MolScribe" },
+          bibtex: "@article{qian2023molscribe, title={MolScribe: Robust Molecular Structure Recognition with Image-to-Graph Generation}, author={Yujie Qian and Jiang Guo and Zhengkai Tu and Zhening Li and Connor W. Coley and Regina Barzilay}, journal={JCIM}, year={2023} }"
+        },
+        {
+          venue: "JCIM 2021",
+          title: "Automated Chemical Reaction Extraction from Scientific Literature",
+          authors: "<b>Jiang Guo</b>*, A. Santiago Ibanez-Lopez*, Hanyu Gao, Victor Quach, Connor W. Coley, Klavs F. Jensen and Regina Barzilay",
+          links: { pdf: "https://pubs.acs.org/doi/10.1021/acs.jcim.1c00284", code: "https://github.com/jiangfeng1124/ChemRxnExtractor", demo: "https://huggingface.co/jiangg/chembert_cased" },
+          bibtex: "@article{guo2021automated, title={Automated Chemical Reaction Extraction from Scientific Literature}, author={Jiang Guo and A. Santiago Ibanez-Lopez and Hanyu Gao and Victor Quach and Connor W. Coley and Klavs F. Jensen and Regina Barzilay}, journal={JCIM}, year={2021} }"
+        },
+        {
+          venue: "Chemical Science 2021",
+          title: "Evaluating and Clustering Retrosynthesis Pathways with Learned Strategy",
+          authors: "Yiming Mo, Yanfei Guan, Pritha Verma, <b>Jiang Guo</b>, Mike E. Fortunato, Zhaohong Lu, Connor W. Coley and Klavs F. Jensen",
+          links: { pdf: "https://pubs.rsc.org/en/content/articlepdf/2021/sc/d0sc05078d", code: "https://github.com/moyiming1/Retrosynthesis-pathway-ranking" },
+          bibtex: "@article{mo2021evaluating, title={Evaluating and Clustering Retrosynthesis Pathways with Learned Strategy}, author={Yiming Mo and Yanfei Guan and Pritha Verma and Jiang Guo and Mike E. Fortunato and Zhaohong Lu and Connor W. Coley and Klavs F. Jensen}, journal={Chemical Science}, year={2021} }"
+        },
+        {
+          venue: "EMNLP 2019",
+          title: "Working Hard or Hardly Working: Challenges of Integrating Typology into Neural Dependency Parsers",
+          authors: "Adam Fisch*, <b>Jiang Guo</b>* and Regina Barzilay",
+          links: { pdf: "https://arxiv.org/pdf/1909.09279.pdf", code: "https://github.com/ajfisch/TypologyParser" },
+          bibtex: "@inproceedings{fisch2019working, title={Working Hard or Hardly Working: Challenges of Integrating Typology into Neural Dependency Parsers}, author={Adam Fisch and Jiang Guo and Regina Barzilay}, booktitle={EMNLP}, year={2019} }"
+        },
+        {
+          venue: "EMNLP 2019",
+          title: "Cross-Lingual BERT Transformation for Zero-Shot Dependency Parsing",
+          authors: "Yuxuan Wang<sup>†</sup>, Wanxiang Che, <b>Jiang Guo</b>, Yijia Liu and Ting Liu",
+          links: { pdf: "https://arxiv.org/pdf/1909.06775.pdf", code: "https://github.com/WangYuxuan93/CLBT" },
+          bibtex: "@inproceedings{wang2019cross, title={Cross-Lingual BERT Transformation for Zero-Shot Dependency Parsing}, author={Yuxuan Wang and Wanxiang Che and Jiang Guo and Yijia Liu and Ting Liu}, booktitle={EMNLP}, year={2019} }"
+        },
+        {
+          venue: "NAACL 2019",
+          title: "GraphIE: A Graph-Based Framework for Information Extraction",
+          authors: "Yujie Qian<sup>†</sup>, Enrico Santus, Zhijing Jin<sup>†</sup>, <b>Jiang Guo</b> and Regina Barzilay",
+          links: { pdf: "https://arxiv.org/pdf/1810.13083.pdf", code: "https://github.com/thomas0809/GraphIE" },
+          bibtex: "@inproceedings{qian2019graphie, title={GraphIE: A Graph-Based Framework for Information Extraction}, author={Yujie Qian and Enrico Santus and Zhijing Jin and Jiang Guo and Regina Barzilay}, booktitle={NAACL}, year={2019} }"
+        },
+        {
+          venue: "EMNLP 2018",
+          title: "Multi-Source Domain Adaptation with Mixture of Experts",
+          authors: "<b>Jiang Guo</b>, Darsh J Shah<sup>†</sup> and Regina Barzilay",
+          links: { pdf: "https://arxiv.org/pdf/1809.02256.pdf", code: "https://github.com/jiangfeng1124/transfer" },
+          bibtex: "@inproceedings{guo2018multi, title={Multi-Source Domain Adaptation with Mixture of Experts}, author={Jiang Guo and Darsh J Shah and Regina Barzilay}, booktitle={EMNLP}, year={2018} }"
+        }
+      ],
+      services: {
+        academic: [
+          "Senior PC: AAAI (2021, 2022)",
+          "Area Chair: CCL (2019, 2020), COLING (2022)",
+          "Journal Reviewer: IEEE/ACM TASLP, ACM TIST, ACS JCIM",
+          "Conference Reviewer: EMNLP, NAACL, ACL, NLPCC, COLM",
+          "PC Member: Student Research Workshop of ACL (2016, 2017, 2018), NAACL (2017, 2018)",
+          "PC Member: NAACL 2016 Workshop on Multilingual and Crosslingual Methods in NLP",
+          "Reviewing Coordinator: ACL (2014), EMNLP (2014), NAACL (2015)"
+        ],
+        industry: [
+          "Senior Applied Scientist at AWS Bedrock / Agentic AI",
+          "Post-Training: Amazon Titan LLMs",
+          "Text2SQL: Amazon Q in QuickSight",
+          "RAG: Amazon Bedrock Knowledge Base",
+          "Agent Primitives: Amazon Bedrock AgentCore"
+        ]
+      },
+      books: [
+        {
+          title: "Natural Language Processing: A Large Language Model Approach",
+          authors: "Wanxiang Che, <b>Jiang Guo</b>, Yiming Cui",
+          publisher: "Publishing House of Electronics Industry",
+          year: "2025.03",
+          cover: "./files/book-covers/nlp-llm-book.png",
+          links: { book: "https://item.jd.com/14395393.html", code: "https://github.com/HIT-SCIR/llm-nlp-book" }
+        },
+        {
+          title: "Natural Language Processing: A Pre-trained Model Approach",
+          authors: "Wanxiang Che, <b>Jiang Guo</b>, Yiming Cui",
+          publisher: "Publishing House of Electronics Industry",
+          year: "2021.07",
+          cover: "./files/book-covers/nlp-plm-book.png",
+          links: { book: "https://item.jd.com/13344628.html", code: "https://github.com/HIT-SCIR/plm-nlp-code" }
+        },
+        {
+          title: "Neural Network Methods for Natural Language Processing",
+          authors: "Yoav Goldberg (Author). Wanxiang Che, <b>Jiang Guo</b>, Weinan Zhang, Ming Liu (Translators)",
+          publisher: "China Machine Press",
+          year: "2018.05",
+          cover: "./files/book-covers/nn-nlp-book.jpg",
+          links: { book: "http://product.china-pub.com/7891598" }
+        }
+      ]
+    };
+  </script>
 
-<p>* <i>indicates authors with equal contribution.</i>
-</p>
-<br>
-<ul>
-    <li>
-        <em><a href="https://arxiv.org/pdf/2502.17957">On Synthetic Data Strategies for Domain-Specific Generative Retrieval</a></em>.
-        <br>Haoyang Wen<sup>&#8225;</sup>, <strong><u>Jiang Guo</u></strong>, Yi Zhang, Jiarong Jiang, Zhiguo Wang
-        <br>ACL Main, 2025
-        <div id="clear"></div>
-    </li>
-    <br>
-    <li>
-      <em><a href="https://arxiv.org/pdf/2409.12172">You Only Read Once (YORO): Learning to Internalize Database Knowledge for Text-to-SQL</a></em>.
-      <br>Hideo Kobayashi<sup>&#8225;</sup>, Wuwei Lan, Peng Shi, Shuaichen Chang, <strong><u>Jiang Guo</u></strong>, Henghui Zhu, Zhiguo Wang, Patrick Ng
-      <br>NAACL Main, 2025
-      <div id="clear"></div>
-    </li>
-    <br>
-    <li>
-      <em><a href="https://arxiv.org/pdf/2401.17585">Propagation and Pitfalls: Reasoning-based Assessment of Knowledge Editing through Counterfactual Tasks</a></em>.<br>
-        Wenyue Hua*<sup>&#8225;</sup>, <strong><u>Jiang Guo</u></strong>*, Mingwen Dong, Henghui Zhu, Patrick Ng, Zhiguo Wang<br>
-        ACL Findings, 2024<br>
-        <a href="https://github.com/awslabs/ReCoE">[ReCoE Dataset]</a>
-        <div id="clear"></div>
-    </li>
-    <br>
-    <li>
-      <em><a href="https://pubs.acs.org/doi/10.1021/acs.jcim.3c00439">RxnScribe: A Sequence Generation Model for Reaction Diagram Parsing</a></em>.<br>
-        Yujie Qian, <strong><u>Jiang Guo</u></strong>, Zhengkai Tu, Connor W. Coley and Regina Barzilay<br>
-        JCIM, 2023<br>
-        <a href="https://github.com/thomas0809/RxnScribe">[Code & Data]</a> <a href="https://huggingface.co/spaces/yujieq/RxnScribe">[Demo]</a>
-        <div id="clear"></div>
-    </li>
-    <br>
-    <li>
-      <em><a href="https://pubs.acs.org/doi/10.1021/acs.jcim.2c01480">MolScribe: Robust Molecular Structure Recognition with Image-to-Graph Generation</a></em>.<br>
-        Yujie Qian, <strong><u>Jiang Guo</u></strong>, Zhengkai Tu, Zhening Li, Connor W. Coley and Regina Barzilay<br>
-        JCIM, 2023<br>
-        <a href="https://github.com/thomas0809/MolScribe">[Code & Data]</a> <a href="https://huggingface.co/spaces/yujieq/MolScribe">[Demo]</a>
-        <div id="clear"></div>
-    </li>
-    <br>
-    <li>
-        <em><a href="https://pubs.acs.org/doi/10.1021/acs.jcim.1c00284">Automated Chemical Reaction Extraction from Scientific Literature</a></em>.<br>
-        <strong><u>Jiang Guo*</u></strong>, A. Santiago Ibanez-Lopez*, Hanyu Gao, Victor Quach, Connor W. Coley, Klavs F. Jensen and Regina Barzilay<br>
-        JCIM, 2021<br>
-        <a href="https://github.com/jiangfeng1124/ChemRxnExtractor">[Code & Data]</a> <a href="https://huggingface.co/jiangg/chembert_cased">[ChemBERT at HuggingFace]</a>
-        <div id="clear"></div>
-    </li>
-    <br>
-    <li>
-        <em><a href="https://pubs.rsc.org/en/content/articlepdf/2021/sc/d0sc05078d">Evaluating and Clustering Retrosynthesis Pathways with Learned Strategy</a></em>.<br>
-        Yiming Mo, Yanfei Guan, Pritha Verma, <strong><u>Jiang Guo</u></strong>, Mike E. Fortunato, Zhaohong Lu, Connor W. Coley and Klavs F. Jensen<br>
-        Chemical Science, 2021<br>
-        <a href="https://github.com/moyiming1/Retrosynthesis-pathway-ranking">[Code]</a>
-        <div id="clear"></div>
-    </li>
-    <br>
-    <li>
-        <em><a href="https://arxiv.org/pdf/2011.08678.pdf">Curriculum CycleGAN for Textual Sentiment Domain Adaptation with Multiple Sources</a></em>.<br>
-        Sicheng Zhao*, Yang Xiao*, <strong><u>Jiang Guo</u></strong>*, Xiangyu Yue*, Jufeng Yang, Ravi Krishna, Pengfei Xu and Kurt Keutzer<br>
-        The Web Conference, 2021<br>
-        <div id="clear"></div>
-    </li>
-    <br>
-    <li>
-        <em><a href="https://arxiv.org/pdf/1909.09279.pdf">Working Hard or Hardly Working: Challenges of Integrating Typology into Neural Dependency Parsers</a></em>.<br>
-        Adam Fisch*, <strong><u>Jiang Guo</u></strong>* and Regina Barzilay<br>
-        EMNLP, 2019<br>
-        <a href="https://github.com/ajfisch/TypologyParser">[Code]</a>
-        <div id="clear"></div>
-    </li>
-    <br>
-    <li>
-        <em><a href="https://arxiv.org/pdf/1909.06775.pdf">Cross-Lingual BERT Transformation for Zero-Shot Dependency Parsing</a></em>.<br>
-        Yuxuan Wang<sup>&#8225;</sup>, Wanxiang Che, <strong><u>Jiang Guo</u></strong>, Yijia Liu and Ting Liu<br>
-        EMNLP, 2019<br>
-        <a href="https://github.com/WangYuxuan93/CLBT">[Code]</a>
-        <div id="clear"></div>
-    </li>
-    <br>
-    <li>
-        <em><a href="https://arxiv.org/pdf/1810.13083.pdf">GraphIE: A Graph-Based Framework for Information Extraction</a></em>.<br>
-        Yujie Qian<sup>&#8225;</sup>, Enrico Santus, Zhijing Jin<sup>&#8225;</sup>, <strong><u>Jiang Guo</u></strong> and Regina Barzilay<br>
-        NAACL, 2019<br>
-        <a href="https://github.com/thomas0809/GraphIE">[Code]</a>
-        <div id="clear"></div>
-    </li>
-    <br>
-    <li>
-        <em><a href="https://arxiv.org/pdf/1809.02256.pdf">Multi-Source Domain Adaptation with Mixture of Experts</a></em>.<br>
-        <strong><u>Jiang Guo</u></strong>, Darsh J Shah<sup>&#8225;</sup> and Regina Barzilay<br>
-        EMNLP, 2018<br>
-        <a href="https://github.com/jiangfeng1124/transfer">[Code]</a>
-        <div id="clear"></div>
-    </li>
-    <br>
-    <li>
-        <em><a href="papers/aaai2018-nnsdp.pdf">A Neural Transition-based Approach for Semantic Dependency Graph Parsing</a></em>.<br>
-        Yuxuan Wang<sup>&#8225;</sup>, Wanxiang Che, <strong><u>Jiang Guo</u></strong> and Ting Liu<br>
-        AAAI, 2018<br>
-        <a href="https://github.com/HITalexwang/lstm-sdparser">[Code]</a>
-        <div id="clear"></div>
-    </li>
-    <br>
-    <li>
-        <em><a href="papers/conll2017-udparsing.pdf">The HIT-SCIR System for End-to-End Parsing of Universal Dependencies</a></em>.<br>
-        Wanxiang Che, <strong><u>Jiang Guo</u></strong>, Yuxuan Wang, Bo Zheng, Huaipeng Zhao, Yang Liu, Dechuan Teng and Ting Liu<br>
-        CoNLL 2017</a> (shared task, ranked 4/33)<br>
-        <div id="clear"></div>
-    </li>
-    <br>
-    <li>
-        <em><a href="papers/ijcai2017-dmnre.pdf">Effective Deep Memory Networks for Distant Supervised Relation Extraction</a></em>.<br>
-        Xiaocheng Feng, <strong><u>Jiang Guo</u></strong>, Bing Qin, Ting Liu<br>
-        IJCAI, 2017<br>
-        <div id="clear"></div>
-    </li>
-    <br>
-    <li>
-        <em><a href="https://arxiv.org/pdf/1610.02906.pdf">A General Framework for Content-enhanced Network Representation Learning</a></em>.<br>
-            Xiaofei Sun<sup>&#8225;</sup>, <strong><u>Jiang Guo</u></strong>, Xiao Ding, Ting Liu<br>
-            arXiv, 2016<br>
-            <div id="clear"></div>
-    </li>
-    <br>
-    <li>
-        <em><a href="papers/coling2016-mtlsrc.pdf">A Unified Architecture for Semantic Role Labeling and Relation Classification</a></em>.<br>
-            <strong><u>Jiang Guo</u></strong>, Wanxiang Che, Haifeng Wang, Ting Liu, Jun Xu<br>
-            COLING, 2016<br>
-            <div id="clear"></div>
-    </li>
-    <br>
-    <li>
-        <em><a href="papers/coling2016-mtldep.pdf">A Universal Framework for Inductive Transfer Parsing across Multi-typed Treebanks</a></em>.<br>
-            <strong><u>Jiang Guo</u></strong>, Wanxiang Che, Haifeng Wang, Ting Liu<br>
-            COLING, 2016<br>
-            <div id="clear"></div>
-    </li>
-    <br>
-    <li>
-        <em><a href="papers/ijcai2016-nnseg.pdf">Exploring Segment Representations for Neural Segmentation Models</a></em>.<br>
-            Yijia Liu, Wanxiang Che, <strong><u>Jiang Guo</u></strong>, Bing Qin, Ting Liu<br>
-            IJCAI, 2016<br>
-            <a href="https://github.com/ExpResults/segrep-for-nn-semicrf">[Code]</a>
-            <div id="clear"></div>
-    </li>
-    <br>
-    <li>
-        <em><a href="papers/jair2016-clnndep.pdf">A Distributed Representation-based Framework for Cross-lingual Transfer Parsing</a></em>.<br>
-            <strong><u>Jiang Guo</u></strong>, Wanxiang Che, David Yarowsky, Haifeng Wang, Ting Liu<br>
-            JAIR, 2016<br>
-            <a href="https://github.com/jiangfeng1124/acl15-clnndep">[Code]</a>
-            <div id="clear"></div>
-    </li>
-    <br>
-    <li>
-        <em><a href="papers/aaai2016-transdep.pdf">A Representation Learning Framework for Multi-Source Transfer Parsing</a></em>.<br>
-            <strong><u>Jiang Guo</u></strong>, Wanxiang Che, David Yarowsky, Haifeng Wang, Ting Liu<br>
-            AAAI, 2016<br>
-            <a href="https://github.com/jiangfeng1124/acl15-clnndep">[Code]</a> <a href="https://drive.google.com/file/d/0B1z04ix6jD_DY3lMN2Ntdy02NFU/view?usp=sharing">[Data]</a>
-            <div id="clear"></div>
-    </li>
-    <br>
+  <!-- ======= RENDERER ======= -->
+  <script>
+    const fmtDate = iso => new Date(iso).toLocaleDateString(undefined, { year:'numeric', month:'short', day:'numeric' });
 
-    <li>
-        <em><a href="papers/acl2015-clnndep.pdf">Cross-lingual Dependency Parsing Based on Distributed Representations</a></em>.<br>
-            <strong><u>Jiang Guo</u></strong>, Wanxiang Che, David Yarowsky, Haifeng Wang, Ting Liu<br>
-            ACL, 2015<br>
-            <a href="https://github.com/jiangfeng1124/acl15-clnndep">[Code]</a>
-            <div id="clear"></div>
-    </li>
-    <br>
+    // Meta and header
+    const titleText = `${SITE_DATA.person.name} — ${SITE_DATA.person.role}`;
+    document.getElementById('meta-title').textContent = titleText;
+    document.getElementById('og-title').setAttribute('content', titleText);
+    document.getElementById('canonical').href = location.href;
 
-    <li>
-        <em><a href="papers/taslp2015-hypernym.pdf">Learning Semantic Hierarchies: A Continuous Vector Space Approach</a></em>.<br>
-            Ruiji Fu*, <strong><u>Jiang Guo</u></strong>*, Bing Qin, Wanxiang Che, Haifeng Wang, Ting Liu<br>
-            TASLP, 2015<br>
-            <div id="clear"></div>
-        </li>
-    <br>
+    document.getElementById('name').textContent = SITE_DATA.person.name + (SITE_DATA.person.nativeName? ` (${SITE_DATA.person.nativeName})` : '');
+    document.getElementById('role').innerHTML = [SITE_DATA.person.role, SITE_DATA.person.affiliation].filter(Boolean).join(' · ') + '<br><span style="font-size: 0.9em; color: var(--muted);">' + SITE_DATA.person.background + '</span>';
+    document.getElementById('bio-photo').src = SITE_DATA.person.bioPhoto;
 
-    <li>
-        <em><a href="papers/emnlp2014-semiemb.pdf">Revisiting Embedding Features for Simple Semi-supervised Learning</a></em>.<br>
-            <strong><u>Jiang Guo</u></strong>, Wanxiang Che, Haifeng Wang, Ting Liu<br>
-            EMNLP, 2014<br>
-            <a href="https://github.com/jiangfeng1124/emnlp14-semi">[Code]</a>
-            <div id="clear"></div>
-        </li>
-    <br>
+    // Contacts line
+    const contacts = [
+      SITE_DATA.person.email && { label: 'Email', href: `mailto:${SITE_DATA.person.email}` },
+      SITE_DATA.person.scholar && { label: 'Google Scholar', href: SITE_DATA.person.scholar },
+      SITE_DATA.person.github && { label: 'GitHub', href: SITE_DATA.person.github },
+      SITE_DATA.person.linkedin && { label: 'LinkedIn', href: SITE_DATA.person.linkedin }
+    ].filter(Boolean);
+    document.getElementById('contacts').innerHTML = contacts.map(c => `<a href="${c.href}" target="_blank" rel="noopener">${c.label}</a>`).join(' · ');
 
-    <li>
-        <em><a href="papers/coling2014-senseEmb.pdf">Learning Sense-specific Word Embeddings By Exploiting Bilingual Resources</a></em>.<br>
-            <strong><u>Jiang Guo</u></strong>, Wanxiang Che, Haifeng Wang, Ting Liu<br>
-            COLING, 2014<br>
-            <div id="clear"></div>
-        </li>
-    <br>
+    // Publications
+    const list = document.getElementById('pubs-list');
+    SITE_DATA.publications.forEach(p => {
+      const li = document.createElement('li');
+      li.className = 'pub-item';
+      const venue = p.venue ? `<span class="muted">${p.venue}.</span> ` : '';
+      li.innerHTML = `<span class="title">${p.title}</span><br><span class="authors">${p.authors}</span><br>${venue}`;
 
-    <li>
-        <em><a href="papers/acl2014-hypernym.pdf">Learning Semantic Hierarchies via Word Embeddings</a></em>.<br>
-            Ruiji Fu, <strong><u>Jiang Guo</u></strong>, Bing Qin, Wanxiang Che, Haifeng Wang, Ting Liu<br>
-            ACL, 2014<br>
-            [Data: <a href="http://ir.hit.edu.cn/~rjfu/data/acl2014/acl2014-dev.txt">Dev</a>, <a href="http://ir.hit.edu.cn/~rjfu/data/acl2014/acl2014-test.txt">Test</a>, <a href="http://ir.hit.edu.cn/~rjfu/data/acl2014/readme">Readme</a>]
-            <div id="clear"></div>
-    </li>
-</ul>
-<br><p></p>
-    <p><b>Book and Translation:</b></p><p></p>
-    <ul>
-        <li>
-            <em><a href="https://item.jd.com/14395393.html">Natural Language Processing: A Large Language Model Approach</a></em>.<br>
-            Wanxiang Che, <strong><u>Jiang Guo</u></strong>, Yiming Cui<br>
-            Publishing House of Electronics Industry, 2025.03<br>
-            <a href="https://github.com/HIT-SCIR/llm-nlp-book">[Code & Slides]</a>
-            <div id="clear"></div>
-        </li>
-        <br>
-        <li>
-            <em><a href="https://item.jd.com/13344628.html">Natural Language Processing: A Pre-trained Model Approach</a></em>.<br>
-            Wanxiang Che, <strong><u>Jiang Guo</u></strong>, Yiming Cui<br>
-            Publishing House of Electronics Industry, 2021.07<br>
-            <a href="https://github.com/HIT-SCIR/plm-nlp-code">[Code & Slides]</a>
-            <div id="clear"></div>
-        </li>
-        <br>
-        <li>
-            <em><a href="http://product.china-pub.com/7891598">Neural Network Methods for Natural Language Processing</a></em>.<br>
-            Yoav Goldberg (Author). Wanxiang Che, <strong><u>Jiang Guo</u></strong>, Weinan Zhang, Ming Liu (Translators)<br>
-            China Machine Press, 2018.05<br>
-        </li>
-    </ul>
-</div>
+      const pills = document.createElement('span'); pills.className = 'pill-row';
+      const order = ['pdf','arxiv','code','data','demo'];
+      order.forEach(k => { 
+        if (p.links && p.links[k]) { 
+          const a = document.createElement('a'); 
+          a.className = 'pill'; 
+          a.href = p.links[k]; 
+          a.textContent = k.toUpperCase(); 
+          a.target = '_blank'; 
+          a.rel = 'noopener'; 
+          pills.appendChild(a); 
+        }
+      });
+      li.appendChild(document.createElement('br'));
+      li.appendChild(pills);
+      list.appendChild(li);
+    });
+
+    // Books
+    const booksList = document.getElementById('books-list');
+    SITE_DATA.books.forEach(book => {
+      const li = document.createElement('li');
+      li.className = 'book-grid';
+      
+      // Create book cover
+      const coverDiv = document.createElement('div');
+      const coverImg = document.createElement('img');
+      coverImg.src = book.cover;
+      coverImg.alt = book.title;
+      coverImg.className = 'book-cover';
+      coverImg.loading = 'lazy';
+      coverDiv.appendChild(coverImg);
+      
+      // Create book info
+      const infoDiv = document.createElement('div');
+      infoDiv.className = 'book-info';
+      infoDiv.innerHTML = `<strong>${book.title}</strong><br>${book.authors}<br>${book.publisher}, ${book.year}`;
+      
+      // Add links if they exist
+      if (book.links) {
+        const links = document.createElement('div');
+        links.className = 'cta-row';
+        if (book.links.book) {
+          const bookLink = document.createElement('a');
+          bookLink.href = book.links.book;
+          bookLink.className = 'btn';
+          bookLink.textContent = 'Book';
+          bookLink.target = '_blank';
+          bookLink.rel = 'noopener';
+          links.appendChild(bookLink);
+        }
+        if (book.links.code) {
+          const codeLink = document.createElement('a');
+          codeLink.href = book.links.code;
+          codeLink.className = 'btn';
+          codeLink.textContent = 'Code';
+          codeLink.target = '_blank';
+          codeLink.rel = 'noopener';
+          links.appendChild(codeLink);
+        }
+        infoDiv.appendChild(links);
+      }
+      
+      li.appendChild(coverDiv);
+      li.appendChild(infoDiv);
+      booksList.appendChild(li);
+    });
+
+    // Services
+    const ulA = document.getElementById('svc-academic');
+    SITE_DATA.services.academic.forEach(s => { const li=document.createElement('li'); li.textContent=s; ulA.appendChild(li); });
+    const ulI = document.getElementById('svc-industry');
+    SITE_DATA.services.industry.forEach(s => { const li=document.createElement('li'); li.textContent=s; ulI.appendChild(li); });
+
+    // Miscellaneous
+    const miscList = document.getElementById('misc-list');
+    SITE_DATA.miscellaneous.forEach(item => {
+      const li = document.createElement('li');
+      li.innerHTML = item.text;
+      miscList.appendChild(li);
+    });
+
+    // Footer
+    const now = new Date();
+    document.getElementById('last-updated').textContent = now.toLocaleDateString(undefined, { year:'numeric', month:'short', day:'numeric' });
+    document.getElementById('copyright-year').textContent = now.getFullYear();
+    document.getElementById('name-footer').textContent = SITE_DATA.person.name;
+
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      const current = document.documentElement.getAttribute('data-theme');
+      const newTheme = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 'auto';
+    if (savedTheme !== 'auto') {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+
+    // Navigation active state
+    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+    const sections = document.querySelectorAll('section[id]');
     
-<a name="sharedtasks"></a>
-<div id="Shared Tasks">
-    <h1>Shared Tasks</h1>
-    <ul>
-    <li><a href="http://universaldependencies.org/conll17/">CoNLL 2017 Shared Task: Multilingual Parsing from Raw Text to Universal Dependencies</a><br>
-        The Fourth Place in 33 submissions of 131 registration teams.</li>
-    <br>
-    <li><a href="https://nlptea2016.weebly.com/shared-task.html">NLPTEA 2016 Shared Task: Chinese Grammatical Error Diagnosis (CGED)</a><br>
-        The First Place.</li>
-    </ul>
-</div>
-
-<a name="act"></a>
-<!-- <div id="line"></div> -->
-
-<div id="Activities">
-    <h1>Academic Services</h1>
-
-    <ul>
-    <li>Senior PC: AAAI (2021, 2022)</li>
-    <li>Area Chair: CCL (2019, 2020), COLING (2022)</li>
-    <li>Journal Reviewer: IEEE/ACM TASLP, ACM TIST, ACS JCIM</li>
-    <li>Conference Reviewer: EMNLP, NAACL, ACL, NLPCC, COLM</li>
-    <li>PC Member: Student Research Workshop of ACL (2016, 2017, 2018), NAACL (2017, 2018)</li>
-    <li>PC Member: NAACL 2016 Workshop on Multilingual and Crosslingual Methods in NLP</li>
-    <li>Reviewing Coordinator: ACL (2014), EMNLP (2014), NAACL (2015)</li>
-	</ul>
-    <div id="clear"></div>
-</div>
+    function updateActiveNav() {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if (scrollY >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    }
     
-<a name="res"></a>
-    
-<div id="Miscellaneous">
-    <h1>Miscellaneous</h1>
-    <ul>
-        <li><a href="http://web.engr.oregonstate.edu/~huanlian/teaching/writing/cuny-gc/how-to-paper-talk-CUNY.pdf">How to Write a Good Paper and How to Give a Good Talk</a> by <a href="http://web.engr.oregonstate.edu/~huanlian/">Liang Huang</a></li>
-        <li><i>"Knowing is not enough, we must apply. Willing is not enough, we must do."</i> -- <a href="https://en.wikipedia.org/wiki/Johann_Wolfgang_von_Goethe">Johann Wolfgang von Goethe</a></li>
-    </ul>
-    <br>
-    <div id="clear"></div>
-</div>
-
-</div>
-<div id="design">Last updated <a>May 20 2024</a> (This template was originally designed by <a href="http://www.cs.cmu.edu/~muli/">Mu Li</a>.)</div>
-
+    window.addEventListener('scroll', updateActiveNav);
+    updateActiveNav(); // Set initial active state
+  </script>
 </body>
 </html>
