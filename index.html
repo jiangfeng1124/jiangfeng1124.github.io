@@ -87,6 +87,22 @@
 
     .about-grid { display:grid; grid-template-columns: 1fr 280px; gap:30px; align-items:start; }
     .about-grid img { max-width:100%; border-radius:6px; }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .container { width: 95vw; }
+      .nav { flex-direction: column; gap: 16px; padding: 16px 0; }
+      .brand { flex-direction: column; text-align: center; gap: 12px; }
+      .brand img { width: 60px; height: 60px; }
+      .brand .name { font-size: 1.4rem; }
+      .brand .role { font-size: 0.9rem; }
+      .nav-links { gap: 16px; font-size: 0.9rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 20px; text-align: center; }
+      .about-grid img { width: 200px; margin: 0 auto; }
+      .book-grid { grid-template-columns: 1fr; gap: 12px; text-align: center; }
+      .book-cover { width: 120px; margin: 0 auto; }
+      .pub-list .title { font-size: 1em; }
+    }
     
     .book-grid { display:grid; grid-template-columns: 150px 1fr; gap:16px; align-items:start; margin-bottom:20px; }
     .book-cover { width:150px; height:auto; border-radius:6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
