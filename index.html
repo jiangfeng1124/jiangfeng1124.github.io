@@ -15,17 +15,23 @@
 
   <link rel="canonical" id="canonical" href="" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>📄</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --bg: #fafafa;
-      --text: #0f172a;  /* slate-900 */
-      --muted: #64748b; /* slate-500 */
+      --text: #3b4553;  /* slate-900 */
+      --muted: #3b4553; /* slate-500 */
       --link: #3b82f6;  /* blue-500 */
       --link-hover: #2563eb; /* blue-600 */
       --rule: #e2e8f0;  /* slate-200 */
       --accent: #f1f5f9; /* slate-100 */
       --border: #cbd5e1; /* slate-300 */
+      --sidebar-width: 280px;
+      --sidebar-bg: rgba(255, 255, 255, 0.8);
+      --sidebar-shadow: rgba(0, 0, 0, 0.05);
     }
     @media (prefers-color-scheme: dark) {
       :root { 
@@ -37,6 +43,8 @@
         --rule:#1e293b; 
         --accent:#1e293b;
         --border:#334155;
+        --sidebar-bg: rgba(15, 23, 42, 0.95);
+        --sidebar-shadow: rgba(0, 0, 0, 0.3);
       }
     }
     [data-theme="light"] { 
@@ -48,6 +56,8 @@
       --rule:#e2e8f0; 
       --accent:#f1f5f9;
       --border:#cbd5e1;
+      --sidebar-bg: rgba(255, 255, 255, 0.8);
+      --sidebar-shadow: rgba(0, 0, 0, 0.05);
     }
     [data-theme="dark"] { 
       --bg:#0f172a; 
@@ -58,6 +68,8 @@
       --rule:#1e293b; 
       --accent:#1e293b;
       --border:#334155;
+      --sidebar-bg: rgba(15, 23, 42, 0.95);
+      --sidebar-shadow: rgba(0, 0, 0, 0.3);
     }
 
     html { scroll-behavior: smooth; }
@@ -66,182 +78,753 @@
     a { color: var(--link); text-decoration: none; transition: color 0.2s ease; }
     a:hover { color: var(--link-hover); text-decoration: underline; }
 
-    .container { width: min(1000px, 92vw); margin: 0 auto; }
-    header.site { border-bottom: 1px solid var(--rule); }
-    .nav { display:flex; justify-content: space-between; align-items:center; padding: 18px 0; }
-    .brand { display:flex; gap:16px; align-items:center; }
-    .brand img { width:72px; height:72px; border-radius: 6px; object-fit: cover; }
-    .brand .name { font-weight:600; font-size: 1.6rem; letter-spacing: -0.01em; }
-    .brand .role { color: var(--muted); font-size: 0.95rem; font-weight: 400; }
+    /* Sidebar layout */
+    .layout-wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
 
-    .nav-links { display:flex; gap:8px; font-size: 0.95rem; }
-    .nav-links a { 
-      color: var(--text); 
-      font-weight: 500; 
-      padding: 8px 16px;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-      position: relative;
-      text-decoration: none;
-      background-color: var(--accent);
+    /* Left sidebar */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      /* width: var(--sidebar-width); */
+      height: 100vh;
+      background: var(--sidebar-bg);
+      backdrop-filter: blur(10px);
+      border-right: 1px solid var(--rule);
+      padding: 32px 24px 20px 24px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 2px 0 12px var(--sidebar-shadow);
     }
-    .nav-links a:hover { 
-      background-color: var(--accent); 
+
+    .sidebar::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .sidebar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb:hover {
+      background: var(--muted);
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .brand .name {
+      font-weight: 700;
+      font-size: 1.4rem;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      color: var(--text);
+    }
+
+    .brand .role {
+      color: var(--muted);
+      font-size: 0.875rem;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    /* Contacts section in main content */
+    .contacts-section-main {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--rule);
+    }
+
+    .contacts-title-main {
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .contacts-links-main {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .contacts-links-main a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       color: var(--link);
-      transform: translateY(-1px);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      font-size: 0.9rem;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      background-color: var(--accent);
+      border: 1px solid var(--border);
     }
-    .nav-links a.active { 
-      font-weight: 600; 
+
+    .contacts-links-main a:hover {
       background-color: var(--link);
       color: white;
-      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
-    }
-    .nav-links a.active:hover {
-      background-color: var(--link-hover);
+      border-color: var(--link);
       transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.25);
     }
 
-    main { padding: 22px 0 40px; }
-    h1, h2, h3 { font-weight: 600; margin: 0 0 12px; }
-    h1 { font-size: 1.75rem; margin-top: 32px; margin-bottom: 16px; }
-    h2 { font-size: 1.4rem; margin-top: 32px; margin-bottom: 16px; border-bottom: 1px solid var(--rule); padding-bottom: 8px; }
-    h3 { font-size: 1.1rem; margin-top: 24px; margin-bottom: 12px; }
-    p, ul { margin: 0 0 16px; }
-    ul { padding-left: 24px; }
-    li { margin-bottom: 8px; }
+    .contacts-links-main a::before {
+      content: '';
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      text-align: center;
+      line-height: 16px;
+      flex-shrink: 0;
+      opacity: 0.8;
+      transition: opacity 0.2s ease;
+    }
 
-    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
+    .contacts-links-main a:hover::before {
+      opacity: 1;
+    }
 
-    .meta { color: var(--muted); font-size: 0.98rem; }
-    .muted { color: var(--muted); }
-    .note { font-size: 0.9em; color: var(--muted); }
+    /* Icon placeholders for main content */
+    .contacts-links-main a[href^="mailto"]::before {
+      content: '';
+      background-image: url('./files/logos/email.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
 
-    .cta-row { display:flex; gap:8px; flex-wrap: wrap; margin: 4px 0 0; }
-    .btn { 
-      display:inline-block; 
-      border:1px solid var(--border); 
-      padding:6px 12px; 
-      border-radius: 6px; 
-      text-decoration:none; 
-      font-size: 0.9rem; 
-      font-weight: 500; 
+    .contacts-links-main a[href*="scholar"]::before {
+      content: '';
+      background-image: url('./files/logos/gscholar.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .contacts-links-main a[href*="github"]::before {
+      content: '';
+      background-image: url('./files/logos/github.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .contacts-links-main a[href*="linkedin"]::before {
+      content: '';
+      background-image: url('./files/logos/linkedin.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .contacts-links-main a[href*="twitter"]::before,
+    .contacts-links-main a[href*="x.com"]::before {
+      content: '';
+      background-image: url('./files/logos/twitter.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    /* Contacts section at bottom of sidebar */
+    .contacts-section {
+      margin-top: auto;
+      padding-top: 12px;
+      padding-bottom: 0;
+      border-top: 1px solid var(--rule);
+      min-width: 0; /* Allow flex item to shrink */
+    }
+
+    .contacts-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin-bottom: 6px;
+      padding: 0 4px;
+    }
+
+    .contacts-links {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding-bottom: 4px;
+    }
+
+    .contacts-links a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      background-color: transparent;
+      flex-wrap: wrap;
+    }
+
+
+    .contacts-links a::before {
+      content: '';
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      text-align: center;
+      line-height: 14px;
+      flex-shrink: 0;
+      opacity: 0.7;
+      transition: opacity 0.2s ease;
+    }
+
+    .contacts-links a:hover::before {
+      opacity: 1;
+    }
+
+    /* Icon placeholders - using Unicode symbols */
+    .contacts-links a[href^="mailto"]::before {
+      content: '';
+      background-image: url('./files/logos/email.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .contacts-links a[href*="scholar"]::before {
+      content: '';
+      background-image: url('./files/logos/gscholar.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .contacts-links a[href*="github"]::before {
+      content: '';
+      background-image: url('./files/logos/github.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .contacts-links a[href*="linkedin"]::before {
+      content: '';
+      background-image: url('./files/logos/linkedin.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .contacts-links a[href*="twitter"]::before,
+    .contacts-links a[href*="x.com"]::before {
+      content: '';
+      background-image: url('./files/logos/twitter.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .nav-section {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-section-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin-bottom: 8px;
+      padding: 0 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 10px 14px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      background-color: transparent;
+      display: block;
+      position: relative;
+    }
+
+    .nav-links a::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 0;
+      background: var(--link);
+      border-radius: 0 2px 2px 0;
+      transition: height 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      background-color: var(--accent);
+      color: var(--link);
+      padding-left: 16px;
+    }
+
+    .nav-links a:hover::before {
+      height: 60%;
+    }
+
+    .nav-links a.active {
+      font-weight: 600;
+      background-color: var(--accent);
+      color: var(--link);
+      /* border-left: 3px solid var(--link); */
+      box-shadow: none;
+      padding-left: 13px;
+    }
+
+    .nav-links a.active::before {
+      height: 70%;
+      background: var(--link);
+    }
+
+    .nav-links a.active:hover {
+      background-color: var(--accent);
+      color: var(--link-hover);
+      border-left-color: var(--link-hover);
+    }
+
+    /* Main content area */
+    .main-content {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      width: calc(100% - var(--sidebar-width));
+      min-height: 100vh;
+      background: var(--bg);
+    }
+
+    .container {
+      width: min(1000px, calc(100% - 80px));
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    main {
+      padding: 48px 0 60px;
+    }
+
+    h1, h2, h3 {
+      font-weight: 600;
+      margin: 0 0 12px;
+      letter-spacing: -0.01em;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      margin-top: 48px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      margin-top: 48px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--rule);
+      padding-bottom: 10px;
+      font-weight: 700;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      margin-top: 20px;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    p, ul {
+      margin: 0 0 16px;
+    }
+
+    ul {
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .note {
+      font-size: 0.9em;
+      color: var(--muted);
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 4px 0 0;
+    }
+
+    .btn {
+      display: inline-block;
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
       background: var(--bg);
       color: var(--text);
       transition: all 0.2s ease;
+      background-color: var(--accent);
     }
+
     .btn:hover {
       background: var(--accent);
       border-color: var(--link);
       color: var(--link);
+      text-decoration: none;
     }
 
     /* Single-column lists */
-    .pub-list { list-style: none; padding-left: 0; }
-    .pub-item { margin: 0 0 20px; }
-    .title { font-weight: 600; font-size: 1.02em; }
-    .authors b { font-weight: 600; }
-    .pill-row { display:inline-flex; gap:8px; flex-wrap: wrap; margin-left: 0px; }
-    .pill { 
-      border:1px solid var(--border); 
-      border-radius: 6px; 
-      padding: 4px 8px; 
-      font-size: 0.85rem; 
-      text-decoration: none; 
-      font-weight: 500; 
+    .pub-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .pub-item {
+      margin: 0 0 16px;
+      padding-bottom: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .pub-item:hover {
+      border-left: 3px solid var(--link);
+      padding-left: 8px;
+    }
+
+    .pub-item:last-child {
+      border-bottom: none;
+    }
+
+    .title {
+      font-weight: 600;
+      font-size: 1.02em;
+      color: var(--text);
+    }
+
+    .authors {
+      color: var(--text);
+    }
+
+    .authors b {
+      font-weight: 600;
+    }
+
+    .pill-row {
+      display: inline-flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-left: 0px;
+    }
+
+    .pill {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 0.85rem;
+      text-decoration: none;
+      font-weight: 500;
       background: var(--bg);
       color: var(--text);
       transition: all 0.2s ease;
+      margin-top: 4px;
+      background-color: var(--accent);
     }
+
     .pill:hover {
       background: var(--accent);
       border-color: var(--link);
       color: var(--link);
+      text-decoration: none;
     }
 
-    .about-grid { display:grid; grid-template-columns: 1fr 280px; gap:30px; align-items:start; }
-    .about-grid img { max-width:90%; border-radius:6px; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .about-grid img {
+      max-width: 85%;
+      border-radius: 6px;
+    }
+
+    .book-grid {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 20px;
+      transition: all 0.2s ease;
+    }
+
+    .book-grid:hover {
+      border-left: 3px solid var(--link);
+      padding-left: 8px;
+    }
+
+    .book-cover {
+      width: 120px;
+      height: auto;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .book-info {
+      flex: 1;
+    }
+
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 32px 0 48px;
+      margin-top: 48px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
 
     /* Mobile responsiveness */
     @media (max-width: 768px) {
-      .container { width: 95vw; }
-      .nav { flex-direction: column; gap: 16px; padding: 16px 0; }
-      .brand { flex-direction: column; text-align: center; gap: 12px; }
-      .brand img { width: 60px; height: 60px; }
-      .brand .name { font-size: 1.4rem; }
-      .brand .role { font-size: 0.9rem; }
-      .nav-links { gap: 4px; font-size: 0.9rem; }
-      .nav-links a { padding: 6px 12px; }
-      .about-grid { grid-template-columns: 1fr; gap: 20px; text-align: center; }
-      .about-grid img { width: 200px; margin: 0 auto; }
-      .book-grid { grid-template-columns: 1fr; gap: 12px; text-align: center; }
-      .book-cover { width: 120px; margin: 0 auto; }
-      .pub-list .title { font-size: 1em; }
-    }
-    
-    .book-grid { display:grid; grid-template-columns: 150px 1fr; gap:16px; align-items:start; margin-bottom:20px; }
-    .book-cover { width:120px; height:auto; border-radius:6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-    .book-info { flex:1; }
+      :root {
+        --sidebar-width: 100%;
+      }
 
-    footer { border-top: 1px solid var(--rule); padding: 16px 0 36px; margin-top: 24px; color: var(--muted); font-size: 0.95rem; }
+      .layout-wrapper {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--rule);
+        padding: 20px;
+        gap: 20px;
+        box-shadow: 0 2px 8px var(--sidebar-shadow);
+      }
+
+      .main-content {
+        margin-left: 0;
+        width: 100%;
+      }
+
+      .container {
+        width: calc(100% - 40px);
+        padding: 0 20px;
+      }
+
+      .brand {
+        padding-bottom: 16px;
+        gap: 12px;
+      }
+
+      .nav-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .nav-links a {
+        padding: 8px 14px;
+        font-size: 0.85rem;
+      }
+
+      .nav-links a::before {
+        display: none;
+      }
+
+      .nav-links a:hover,
+      .nav-links a.active {
+        padding-left: 14px;
+      }
+
+      .brand .name {
+        font-size: 1.25rem;
+      }
+
+      .brand .role {
+        font-size: 0.8rem;
+      }
+
+      .contacts-section {
+        margin-top: 20px;
+        padding-top: 24px;
+      }
+
+      .contacts-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .contacts-links a {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+      }
+
+      main {
+        padding: 32px 0 40px;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        text-align: center;
+      }
+
+      .about-grid img {
+        width: 200px;
+        margin: 0 auto;
+      }
+
+      .book-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        text-align: center;
+      }
+
+      .book-cover {
+        width: 120px;
+        margin: 0 auto;
+      }
+
+      .pub-list .title {
+        font-size: 1em;
+      }
+
+      main {
+        padding: 20px 0 40px;
+      }
+    }
   </style>
 </head>
 <body>
   <a class="sr-only" href="#content">Skip to content</a>
 
-  <header class="site">
-    <div class="container nav">
+  <div class="layout-wrapper">
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
       <div class="brand">
-        <div>
-          <div class="name" id="name">Your Name</div>
-          <div class="role" id="role">Applied Scientist · Affiliation</div>
-          <div class="meta" id="contacts"></div>
-        </div>
+        <div class="name" id="name">Your Name</div>
+        <div class="role" id="role">Applied Scientist · Affiliation</div>
       </div>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="#about">About</a>
-        <a href="#publications">Publications</a>
-        <a href="#books">Books</a>
-        <a href="#services">Services</a>
+
+      <nav class="nav-section" aria-label="Primary">
+
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#publications">Publications</a>
+          <a href="#books">Books</a>
+          <a href="#services">Services</a>
+        </div>
       </nav>
-    </div>
-  </header>
+    </aside>
 
-  <main id="content" class="container">
-    <section id="about" aria-labelledby="about-title">
-      <div class="about-grid">
-        <div>
-          <p>I am currently a Senior Applied Scientist at <a href="https://aws.amazon.com/ai/agentic-ai/">AWS Agentic AI</a>. Previously, I was a Postdoctoral researcher at <a href="https://www.csail.mit.edu/">MIT CSAIL</a>, working with <a href="https://www.regina.csail.mit.edu/">Regina Barzilay</a>. I earned my Ph.D. from the <a href="http://ir.hit.edu.cn/">SCIR lab</a> at Harbin Institute of Technology, under the supervision of <a href="https://haifengwang.net/">Haifeng Wang</a> and <a href="https://chewanxiang.com/">Wanxiang Che</a>, and was a visiting student at Johns Hopkins University, advised by <a href="http://www.cs.jhu.edu/~yarowsky/">David Yarowsky</a>.</p>
-          <p>My research interests span a broad spectrum of topics in natural language processing and machine learning. My earlier work focused on low-resource learning, with applications in cross-lingual, task, and domain transfer, as well as AI for chemical sciences. More recently, my work has centered on <b>large language models (LLMs)</b> and their industrial applications, including Post-Training (<a href="https://aws.amazon.com/bedrock/amazon-models/titan/">Amazon Titan LLMs</a>), Semantic Parsing (<a href="https://aws.amazon.com/quicksight/q/">Amazon Q in QuickSight</a>), Information Retrieval / RAG (<a href="https://aws.amazon.com/bedrock/knowledge-bases/">Amazon Bedrock Knowledge Base</a>), and Agent Memory Primitives (<a href="https://aws.amazon.com/bedrock/agentcore/">Amazon Bedrock AgentCore</a>).</p>
+    <!-- Main Content -->
+    <div class="main-content">
+      <main id="content" class="container">
+        <section id="about" aria-labelledby="about-title">
+          <h2 id="about-title">About Me</h2>
+          <div class="about-grid">
+            <div>
+              <p>I am currently a Senior Applied Scientist at <a href="https://aws.amazon.com/ai/agentic-ai/">AWS Agentic AI</a>. Previously, I was a Postdoctoral researcher at <a href="https://www.csail.mit.edu/">MIT CSAIL</a>, working with <a href="https://www.regina.csail.mit.edu/">Regina Barzilay</a>. I earned my Ph.D. from the <a href="http://ir.hit.edu.cn/">SCIR lab</a> at Harbin Institute of Technology, under the supervision of <a href="https://haifengwang.net/">Haifeng Wang</a> and <a href="https://chewanxiang.com/">Wanxiang Che</a>, and was a visiting student at Johns Hopkins University, advised by <a href="http://www.cs.jhu.edu/~yarowsky/">David Yarowsky</a>.</p>
+              <p>My research interests span a broad spectrum of topics in natural language processing (NLP) and machine learning. My earlier work focused on low-resource learning, with applications in cross-lingual, task, and domain transfer, as well as AI for chemical sciences. More recently, my work has centered on <b>large language models (LLMs)</b> and <b>agentic AI</b>, including Post-Training (<a href="https://aws.amazon.com/bedrock/amazon-models/titan/">Amazon Titan LLMs</a>), Semantic Parsing (<a href="https://aws.amazon.com/quicksight/q/">Amazon Q in QuickSight</a>), Information Retrieval / RAG (<a href="https://aws.amazon.com/bedrock/knowledge-bases/">Amazon Bedrock Knowledge Base</a>), and Agent Primitives (<a href="https://aws.amazon.com/bedrock/agentcore/">Amazon Bedrock AgentCore</a>).</p>
+              
+              <div class="contacts-links-main" id="contacts"></div>
+            </div>
+            <div>
+              <img id="bio-photo" src="./files/bio-photo4.png" alt="Bio photo" loading="lazy" />
+            </div>
+          </div>
+        </section>
+
+        <section id="publications" aria-labelledby="pubs-title">
+          <h2 id="pubs-title">Recent Publications [<a href="https://scholar.google.com/citations?user=WiqWaE4AAAAJ&hl=en">Full Publications</a>]</h2>
+          <p class="note">* <i>indicates authors with equal contribution.</i> † <i>indicates authors I've mentored.</i></p>
+          <ol class="pub-list" id="pubs-list"></ol>
+        </section>
+
+        <section id="books" aria-labelledby="books-title">
+          <h2 id="books-title">Books</h2>
+          <ul id="books-list" class="meta"></ul>
+        </section>
+
+        <section id="services" aria-labelledby="services-title">
+          <h2 id="services-title">Services</h2>
+          <ul id="svc-academic" class="meta"></ul>
+        </section>
+      </main>
+
+      <footer>
+        <div class="container">
+          <small>Last updated <time id="last-updated"></time> · © <span id="copyright-year"></span> <span id="name-footer"></span></small>
         </div>
-        <div>
-          <img id="bio-photo" src="./files/bio-photo4.png" alt="Bio photo" loading="lazy" />
-        </div>
-      </div>
-    </section>
-
-    <section id="publications" aria-labelledby="pubs-title">
-      <h2 id="pubs-title">Recent Publications [<a href="https://scholar.google.com/citations?user=WiqWaE4AAAAJ&hl=en">Full Publications</a>]</h2>
-      <p class="note">* <i>indicates authors with equal contribution.</i> † <i>indicates authors I've mentored.</i></p>
-      <ol class="pub-list" id="pubs-list"></ol>
-    </section>
-
-    <section id="books" aria-labelledby="books-title">
-      <h2 id="books-title">Books</h2>
-      <ul id="books-list" class="meta"></ul>
-    </section>
-
-    <section id="services" aria-labelledby="services-title">
-      <h2 id="services-title">Services</h2>
-      <ul id="svc-academic" class="meta"></ul>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <small>Last updated <time id="last-updated"></time> · © <span id="copyright-year"></span> <span id="name-footer"></span></small>
+      </footer>
     </div>
-  </footer>
+  </div>
 
   <script id="schema-person" type="application/ld+json"></script>
 
@@ -252,12 +835,11 @@
         name: "Jiang Guo",
         nativeName: "郭江",
         role: "Senior Applied Scientist",
-        affiliation: "AWS Bedrock / Agentic AI",
+        affiliation: "AWS AI",
         background: "Previously: MIT CSAIL (Postdoc) | HIT (Ph.D.)",
         email: "jiangfeng1124@gmail.com",
         scholar: "https://scholar.google.com/citations?user=WiqWaE4AAAAJ&hl=en",
         github: "https://github.com/jiangfeng1124",
-        x: "https://twitter.com/jiangfeng1124",
         linkedin: "https://www.linkedin.com/in/jiang-guo-48080018/",
         bioPhoto: "./files/bio-photo4.png"
       },
@@ -389,7 +971,7 @@
 
   <!-- ======= RENDERER ======= -->
   <script>
-    const fmtDate = iso => new Date(iso).toLocaleDateString(undefined, { year:'numeric', month:'short', day:'numeric' });
+    const fmtDate = iso => new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
 
     // Meta and header
     const titleText = `${SITE_DATA.person.name} — ${SITE_DATA.person.role}`;
@@ -397,8 +979,8 @@
     document.getElementById('og-title').setAttribute('content', titleText);
     document.getElementById('canonical').href = location.href;
 
-    document.getElementById('name').textContent = SITE_DATA.person.name + (SITE_DATA.person.nativeName? ` (${SITE_DATA.person.nativeName})` : '');
-    document.getElementById('role').innerHTML = [SITE_DATA.person.role, SITE_DATA.person.affiliation].filter(Boolean).join(' · ') + '<br><span style="font-size: 0.9em; color: var(--muted);">' + SITE_DATA.person.background + '</span>';
+    document.getElementById('name').textContent = SITE_DATA.person.name + (SITE_DATA.person.nativeName ? ` (${SITE_DATA.person.nativeName})` : '');
+    document.getElementById('role').innerHTML = [SITE_DATA.person.role, SITE_DATA.person.affiliation].filter(Boolean).join(' · ');
     document.getElementById('bio-photo').src = SITE_DATA.person.bioPhoto;
 
     // Contacts line
@@ -408,7 +990,9 @@
       SITE_DATA.person.github && { label: 'GitHub', href: SITE_DATA.person.github },
       SITE_DATA.person.linkedin && { label: 'LinkedIn', href: SITE_DATA.person.linkedin }
     ].filter(Boolean);
-    document.getElementById('contacts').innerHTML = contacts.map(c => `<a href="${c.href}" target="_blank" rel="noopener">${c.label}</a>`).join(' · ');
+    document.getElementById('contacts').innerHTML = contacts.map(c => 
+      `<a href="${c.href}" target="_blank" rel="noopener">${c.label}</a>`
+    ).join('');
 
     // Publications
     const list = document.getElementById('pubs-list');
@@ -418,17 +1002,18 @@
       const venue = p.venue ? `<span class="muted">${p.venue}.</span> ` : '';
       li.innerHTML = `<span class="title">${p.title}</span><br><span class="authors">${p.authors}</span><br>${venue}`;
 
-      const pills = document.createElement('span'); pills.className = 'pill-row';
-      const order = ['paper','arxiv','code','data','demo'];
-      order.forEach(k => { 
-        if (p.links && p.links[k]) { 
-          const a = document.createElement('a'); 
-          a.className = 'pill'; 
-          a.href = p.links[k]; 
-          a.textContent = k.charAt(0).toUpperCase() + k.slice(1); 
-          a.target = '_blank'; 
-          a.rel = 'noopener'; 
-          pills.appendChild(a); 
+      const pills = document.createElement('span');
+      pills.className = 'pill-row';
+      const order = ['paper', 'arxiv', 'code', 'data', 'demo'];
+      order.forEach(k => {
+        if (p.links && p.links[k]) {
+          const a = document.createElement('a');
+          a.className = 'pill';
+          a.href = p.links[k];
+          a.textContent = k.charAt(0).toUpperCase() + k.slice(1);
+          a.target = '_blank';
+          a.rel = 'noopener';
+          pills.appendChild(a);
         }
       });
       li.appendChild(document.createElement('br'));
@@ -441,7 +1026,7 @@
     SITE_DATA.books.forEach(book => {
       const li = document.createElement('li');
       li.className = 'book-grid';
-      
+
       // Create book cover
       const coverDiv = document.createElement('div');
       const coverImg = document.createElement('img');
@@ -450,12 +1035,12 @@
       coverImg.className = 'book-cover';
       coverImg.loading = 'lazy';
       coverDiv.appendChild(coverImg);
-      
+
       // Create book info
       const infoDiv = document.createElement('div');
       infoDiv.className = 'book-info';
       infoDiv.innerHTML = `<strong>${book.title}</strong><br>${book.authors}<br>${book.publisher}, ${book.year}`;
-      
+
       // Add links if they exist
       if (book.links) {
         const links = document.createElement('div');
@@ -480,7 +1065,7 @@
         }
         infoDiv.appendChild(links);
       }
-      
+
       li.appendChild(coverDiv);
       li.appendChild(infoDiv);
       booksList.appendChild(li);
@@ -488,53 +1073,116 @@
 
     // Services
     const ulA = document.getElementById('svc-academic');
-    SITE_DATA.services.academic.forEach(s => { const li=document.createElement('li'); li.textContent=s; ulA.appendChild(li); });
+    if (ulA) {
+      SITE_DATA.services.academic.forEach(s => {
+        const li = document.createElement('li');
+        li.textContent = s;
+        ulA.appendChild(li);
+      });
+    }
     const ulI = document.getElementById('svc-industry');
-    SITE_DATA.services.industry.forEach(s => { const li=document.createElement('li'); li.textContent=s; ulI.appendChild(li); });
+    if (ulI) {
+      SITE_DATA.services.industry.forEach(s => {
+        const li = document.createElement('li');
+        li.textContent = s;
+        ulI.appendChild(li);
+      });
+    }
 
     // Miscellaneous
     const miscList = document.getElementById('misc-list');
-    SITE_DATA.miscellaneous.forEach(item => {
-      const li = document.createElement('li');
-      li.innerHTML = item.text;
-      miscList.appendChild(li);
-    });
+    if (miscList && SITE_DATA.miscellaneous) {
+      SITE_DATA.miscellaneous.forEach(item => {
+        const li = document.createElement('li');
+        li.innerHTML = item.text;
+        miscList.appendChild(li);
+      });
+    }
 
     // Footer
     const now = new Date();
-    document.getElementById('last-updated').textContent = now.toLocaleDateString(undefined, { year:'numeric', month:'short', day:'numeric' });
+    document.getElementById('last-updated').textContent = now.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
     document.getElementById('copyright-year').textContent = now.getFullYear();
     document.getElementById('name-footer').textContent = SITE_DATA.person.name;
 
     // Theme toggle
     const themeToggle = document.getElementById('themeToggle');
-    themeToggle.addEventListener('click', (e) => {
-      e.preventDefault();
-      const current = document.documentElement.getAttribute('data-theme');
-      const newTheme = current === 'light' ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-    });
-
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme') || 'auto';
-    if (savedTheme !== 'auto') {
-      document.documentElement.setAttribute('data-theme', savedTheme);
+    if (themeToggle) {
+      themeToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        const current = document.documentElement.getAttribute('data-theme');
+        const newTheme = current === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+      });
     }
 
-    // Navigation active state
+    // Load saved theme - default to light mode
+    document.documentElement.setAttribute('data-theme', 'light');
+
+    // Navigation active state - keep clicked link active permanently
     const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
     const sections = document.querySelectorAll('section[id]');
-    
+    let clickedLink = null;
+
+    // Handle click on navigation links
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        console.log('Link clicked:', this.getAttribute('href'));
+        
+        // Set clicked link
+        clickedLink = this.getAttribute('href');
+        
+        // Remove active from all links
+        navLinks.forEach(l => {
+          l.classList.remove('active');
+        });
+        
+        // Add active to clicked link
+        this.classList.add('active');
+        console.log('Active class added, clickedLink:', clickedLink);
+        
+        // Scroll to the section
+        const targetSection = document.querySelector(clickedLink);
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        // Update URL hash
+        if (history.pushState) {
+          history.pushState(null, null, clickedLink);
+        }
+      });
+    });
+
     function updateActiveNav() {
+      // If a link was clicked, ALWAYS keep it active - this should never be overridden
+      if (clickedLink) {
+        console.log('updateActiveNav: clickedLink is set, keeping active:', clickedLink);
+        navLinks.forEach(link => {
+          const href = link.getAttribute('href');
+          if (href === clickedLink) {
+            link.classList.add('active');
+            console.log('Keeping active:', href);
+          } else {
+            link.classList.remove('active');
+          }
+        });
+        return; // CRITICAL: Don't let scroll override clicked link
+      }
+
+      // Otherwise, update based on scroll position
       let current = '';
       sections.forEach(section => {
         const sectionTop = section.offsetTop - 100;
-        if (scrollY >= sectionTop) {
+        if (window.scrollY >= sectionTop) {
           current = section.getAttribute('id');
         }
       });
-      
+
       navLinks.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href') === `#${current}`) {
@@ -542,8 +1190,17 @@
         }
       });
     }
+
+    // Use throttled scroll handler
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        console.log('Scroll event fired, clickedLink:', clickedLink);
+        updateActiveNav();
+      }, 100);
+    }, { passive: true });
     
-    window.addEventListener('scroll', updateActiveNav);
     updateActiveNav(); // Set initial active state
   </script>
 </body>
