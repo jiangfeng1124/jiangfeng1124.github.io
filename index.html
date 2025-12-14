@@ -21,17 +21,17 @@
 
   <style>
     :root {
-      --bg: #fafafa;
+      --bg: #fffaf5;    /* warm cream background like xiangfu.co */
       --text: #3b4553;  /* slate-900 */
-      --muted: #3b4553; /* slate-500 */
+      --muted: #6b7280; /* slate-500 */
       --link: #3b82f6;  /* blue-500 */
       --link-hover: #2563eb; /* blue-600 */
-      --rule: #e2e8f0;  /* slate-200 */
-      --accent: #f1f5f9; /* slate-100 */
-      --border: #cbd5e1; /* slate-300 */
+      --rule: #e8e0d8;  /* warm gray border */
+      --accent: #f7f2ec; /* warm cream accent */
+      --border: #ddd5cb; /* warm gray border */
       --sidebar-width: 280px;
-      --sidebar-bg: rgba(255, 255, 255, 0.8);
-      --sidebar-shadow: rgba(0, 0, 0, 0.05);
+      --sidebar-bg: rgba(255, 250, 245, 0.92);
+      --sidebar-shadow: rgba(0, 0, 0, 0.04);
     }
     @media (prefers-color-scheme: dark) {
       :root { 
@@ -48,16 +48,16 @@
       }
     }
     [data-theme="light"] { 
-      --bg:#fafafa; 
-      --text:#0f172a; 
-      --muted:#64748b; 
-      --link:#3b82f6; 
-      --link-hover:#2563eb;
-      --rule:#e2e8f0; 
-      --accent:#f1f5f9;
-      --border:#cbd5e1;
-      --sidebar-bg: rgba(255, 255, 255, 0.8);
-      --sidebar-shadow: rgba(0, 0, 0, 0.05);
+      --bg: #fffaf5;    /* warm cream background */
+      --text: #3b4553; 
+      --muted: #6b7280; 
+      --link: #3b82f6; 
+      --link-hover: #2563eb;
+      --rule: #e8e0d8; 
+      --accent: #f7f2ec;
+      --border: #ddd5cb;
+      --sidebar-bg: rgba(255, 250, 245, 0.92);
+      --sidebar-shadow: rgba(0, 0, 0, 0.04);
     }
     [data-theme="dark"] { 
       --bg:#0f172a; 
@@ -86,10 +86,10 @@
 
     /* Left sidebar */
     .sidebar {
-      position: fixed;
-      left: 0;
+      position: sticky;
       top: 0;
-      /* width: var(--sidebar-width); */
+      width: var(--sidebar-width);
+      min-width: var(--sidebar-width);
       height: 100vh;
       background: var(--sidebar-bg);
       backdrop-filter: blur(10px);
@@ -102,6 +102,7 @@
       flex-direction: column;
       gap: 16px;
       box-shadow: 2px 0 12px var(--sidebar-shadow);
+      flex-shrink: 0;
     }
 
     .sidebar::-webkit-scrollbar {
@@ -144,108 +145,39 @@
       line-height: 1.5;
     }
 
-    /* Contacts section in main content */
-    .contacts-section-main {
-      margin-top: 20px;
-      padding-top: 20px;
-      border-top: 1px solid var(--rule);
-    }
-
-    .contacts-title-main {
-      font-size: 0.875rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--muted);
-      margin-bottom: 12px;
-    }
-
-    .contacts-links-main {
+    .sidebar-contacts {
       display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 12px;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 12px;
     }
 
-    .contacts-links-main a {
+    .sidebar-contacts a {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      color: var(--link);
-      font-size: 0.9rem;
-      padding: 6px 12px;
-      border-radius: 6px;
+      gap: 8px;
+      padding: 5px 0;
+      color: var(--text);
+      font-size: 0.85rem;
       text-decoration: none;
       transition: all 0.2s ease;
-      background-color: var(--accent);
-      border: 1px solid var(--border);
     }
 
-    .contacts-links-main a:hover {
-      background-color: var(--link);
-      color: white;
-      border-color: var(--link);
-      transform: translateY(-1px);
-      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.25);
+    .sidebar-contacts a:hover {
+      color: var(--link);
+      text-decoration: none;
     }
 
-    .contacts-links-main a::before {
-      content: '';
-      display: inline-block;
+    .sidebar-contacts .contact-icon {
       width: 16px;
       height: 16px;
-      text-align: center;
-      line-height: 16px;
-      flex-shrink: 0;
-      opacity: 0.8;
-      transition: opacity 0.2s ease;
+      opacity: 0.7;
     }
 
-    .contacts-links-main a:hover::before {
+    .sidebar-contacts a:hover .contact-icon {
       opacity: 1;
     }
 
-    /* Icon placeholders for main content */
-    .contacts-links-main a[href^="mailto"]::before {
-      content: '';
-      background-image: url('./files/logos/email.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-    }
-
-    .contacts-links-main a[href*="scholar"]::before {
-      content: '';
-      background-image: url('./files/logos/gscholar.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-    }
-
-    .contacts-links-main a[href*="github"]::before {
-      content: '';
-      background-image: url('./files/logos/github.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-    }
-
-    .contacts-links-main a[href*="linkedin"]::before {
-      content: '';
-      background-image: url('./files/logos/linkedin.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-    }
-
-    .contacts-links-main a[href*="twitter"]::before,
-    .contacts-links-main a[href*="x.com"]::before {
-      content: '';
-      background-image: url('./files/logos/twitter.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-    }
 
     /* Contacts section at bottom of sidebar */
     .contacts-section {
@@ -288,62 +220,118 @@
     }
 
 
-    .contacts-links a::before {
-      content: '';
-      display: inline-block;
+    .contacts-links .contact-icon {
       width: 14px;
       height: 14px;
-      text-align: center;
-      line-height: 14px;
       flex-shrink: 0;
       opacity: 0.7;
       transition: opacity 0.2s ease;
     }
 
-    .contacts-links a:hover::before {
+    .contacts-links a:hover .contact-icon {
       opacity: 1;
     }
 
-    /* Icon placeholders - using Unicode symbols */
-    .contacts-links a[href^="mailto"]::before {
-      content: '';
-      background-image: url('./files/logos/email.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
+    /* Theme toggle button */
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--accent);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: var(--text);
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 200;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
-    .contacts-links a[href*="scholar"]::before {
-      content: '';
-      background-image: url('./files/logos/gscholar.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
+    .theme-toggle:hover {
+      background: var(--link);
+      color: white;
+      border-color: var(--link);
+      transform: scale(1.05);
     }
 
-    .contacts-links a[href*="github"]::before {
-      content: '';
-      background-image: url('./files/logos/github.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
+    .theme-toggle svg {
+      width: 18px;
+      height: 18px;
     }
 
-    .contacts-links a[href*="linkedin"]::before {
-      content: '';
-      background-image: url('./files/logos/linkedin.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
+    .theme-toggle .sun-icon {
+      display: none;
     }
 
-    .contacts-links a[href*="twitter"]::before,
-    .contacts-links a[href*="x.com"]::before {
-      content: '';
-      background-image: url('./files/logos/twitter.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
+    .theme-toggle .moon-icon {
+      display: block;
+    }
+
+    [data-theme="dark"] .theme-toggle .sun-icon {
+      display: block;
+    }
+
+    [data-theme="dark"] .theme-toggle .moon-icon {
+      display: none;
+    }
+
+    /* Copy BibTeX toast notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--text);
+      color: var(--bg);
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* BibTeX copy button styling */
+    .pill.bibtex-btn {
+      cursor: pointer;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      background: var(--accent);
+      color: var(--text);
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .pill.bibtex-btn:hover {
+      background: var(--link);
+      color: white;
+      border-color: var(--link);
+    }
+
+    .pill.bibtex-btn svg {
+      transition: all 0.2s ease;
+    }
+
+    .pill.bibtex-btn:hover svg {
+      stroke: white;
     }
 
     .nav-section {
@@ -426,9 +414,8 @@
 
     /* Main content area */
     .main-content {
-      margin-left: var(--sidebar-width);
       flex: 1;
-      width: calc(100% - var(--sidebar-width));
+      min-width: 0;
       min-height: 100vh;
       background: var(--bg);
     }
@@ -543,14 +530,17 @@
     }
 
     .pub-item {
-      margin: 0 0 16px;
-      padding-bottom: 6px;
+      margin: 0 0 2px;
+      padding: 8px 8px;
+      border-radius: 8px;
+      border: 1px solid transparent;
       transition: all 0.2s ease;
     }
 
     .pub-item:hover {
-      border-left: 3px solid var(--link);
-      padding-left: 8px;
+      border-color: var(--border);
+      background: var(--accent);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     }
 
     .pub-item:last-child {
@@ -599,11 +589,39 @@
       text-decoration: none;
     }
 
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .btn-icon {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn .btn-icon {
+      width: 14px;
+      height: 14px;
+    }
+
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 280px;
       gap: 30px;
-      align-items: start;
+      align-items: center;
+    }
+
+    .about-grid .about-photo {
+      padding-left: 30px;
+      border-left: 1px solid var(--border);
     }
 
     .about-grid img {
@@ -611,18 +629,32 @@
       border-radius: 6px;
     }
 
+    /* Focus List in About section */
+    .focus-list {
+      margin: 8px 0 16px;
+      padding-left: 24px;
+    }
+
+    .focus-list li {
+      margin-bottom: 4px;
+    }
+
     .book-grid {
       display: grid;
       grid-template-columns: 150px 1fr;
       gap: 16px;
       align-items: start;
-      margin-bottom: 20px;
+      margin-bottom: 2px;
+      padding: 14px;
+      border-radius: 8px;
+      border: 1px solid transparent;
       transition: all 0.2s ease;
     }
 
     .book-grid:hover {
-      border-left: 3px solid var(--link);
-      padding-left: 8px;
+      border-color: var(--border);
+      background: var(--accent);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     }
 
     .book-cover {
@@ -658,6 +690,7 @@
       .sidebar {
         position: relative;
         width: 100%;
+        min-width: unset;
         height: auto;
         border-right: none;
         border-bottom: 1px solid var(--rule);
@@ -667,7 +700,6 @@
       }
 
       .main-content {
-        margin-left: 0;
         width: 100%;
       }
 
@@ -735,6 +767,11 @@
         text-align: center;
       }
 
+      .about-grid .about-photo {
+        padding-left: 0;
+        border-left: none;
+      }
+
       .about-grid img {
         width: 200px;
         margin: 0 auto;
@@ -758,11 +795,21 @@
       main {
         padding: 20px 0 40px;
       }
+
+      .theme-toggle {
+        top: 16px;
+        right: 16px;
+        width: 36px;
+        height: 36px;
+      }
     }
   </style>
 </head>
 <body>
   <a class="sr-only" href="#content">Skip to content</a>
+
+  <!-- Toast notification for copy feedback -->
+  <div class="toast" id="toast">BibTeX copied to clipboard!</div>
 
   <div class="layout-wrapper">
     <!-- Left Sidebar -->
@@ -770,6 +817,7 @@
       <div class="brand">
         <div class="name" id="name">Your Name</div>
         <div class="role" id="role">Applied Scientist · Affiliation</div>
+        <div class="sidebar-contacts" id="sidebar-contacts"></div>
       </div>
 
       <nav class="nav-section" aria-label="Primary">
@@ -785,17 +833,33 @@
 
     <!-- Main Content -->
     <div class="main-content">
+      <!-- Theme Toggle Button -->
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+      </button>
+
       <main id="content" class="container">
         <section id="about" aria-labelledby="about-title">
           <h2 id="about-title">About Me</h2>
           <div class="about-grid">
             <div>
-              <p>I am currently a Senior Applied Scientist at <a href="https://aws.amazon.com/ai/agentic-ai/">AWS Agentic AI</a>. Previously, I was a Postdoctoral researcher at <a href="https://www.csail.mit.edu/">MIT CSAIL</a>, working with <a href="https://www.regina.csail.mit.edu/">Regina Barzilay</a>. I earned my Ph.D. from the <a href="http://ir.hit.edu.cn/">SCIR lab</a> at Harbin Institute of Technology, under the supervision of <a href="https://haifengwang.net/">Haifeng Wang</a> and <a href="https://chewanxiang.com/">Wanxiang Che</a>, and was a visiting student at Johns Hopkins University, advised by <a href="http://www.cs.jhu.edu/~yarowsky/">David Yarowsky</a>.</p>
-              <p>My research interests span a broad spectrum of topics in natural language processing (NLP) and machine learning. My earlier work focused on low-resource learning, with applications in cross-lingual, task, and domain transfer, as well as AI for chemical sciences. More recently, my work has centered on <b>large language models (LLMs)</b> and <b>agentic AI</b>, including Post-Training (<a href="https://aws.amazon.com/bedrock/amazon-models/titan/">Amazon Titan LLMs</a>), Semantic Parsing (<a href="https://aws.amazon.com/quicksight/q/">Amazon Q in QuickSight</a>), Information Retrieval / RAG (<a href="https://aws.amazon.com/bedrock/knowledge-bases/">Amazon Bedrock Knowledge Base</a>), and Agent Primitives (<a href="https://aws.amazon.com/bedrock/agentcore/">Amazon Bedrock AgentCore</a>).</p>
+              <p>I am currently a Senior Applied Scientist at <a href="https://aws.amazon.com/ai/agentic-ai/">AWS Agentic AI</a> working on large language models (LLMs) and agentic AI. Previously, I was a Postdoctoral researcher at <a href="https://www.csail.mit.edu/">MIT CSAIL</a>, working with <a href="https://www.regina.csail.mit.edu/">Regina Barzilay</a> on AI for chemical sciences. I started my academic journey on NLP from <a href="http://ir.hit.edu.cn/">HIT SCIR</a>, under the supervision of <a href="https://haifengwang.net/">Haifeng Wang</a> and <a href="https://chewanxiang.com/">Wanxiang Che</a>, and was a visiting student at Johns Hopkins University, advised by <a href="http://www.cs.jhu.edu/~yarowsky/">David Yarowsky</a>.</p>
               
-              <div class="contacts-links-main" id="contacts"></div>
+              <p>My research interests span a broad spectrum of topics in natural language processing (NLP) and machine learning. My recent work includes:</p>
+              
+              <ul class="focus-list">
+                <li><b>Post-Training</b> — <a href="https://aws.amazon.com/bedrock/amazon-models/titan/">Amazon Titan LLMs</a></li>
+                <li><b>Text-to-SQL</b> — <a href="https://aws.amazon.com/quicksight/q/">Amazon Q in QuickSight</a></li>
+                <li><b>IR / RAG</b> — <a href="https://aws.amazon.com/bedrock/knowledge-bases/">Amazon Bedrock Knowledge Bases</a></li>
+                <li><b>Agent Memory</b> — <a href="https://aws.amazon.com/bedrock/agentcore/">Amazon Bedrock AgentCore</a></li>
+              </ul>
             </div>
-            <div>
+            <div class="about-photo">
               <img id="bio-photo" src="./files/bio-photo4.png" alt="Bio photo" loading="lazy" />
             </div>
           </div>
@@ -849,77 +913,77 @@
           title: "On Synthetic Data Strategies for Domain-Specific Generative Retrieval",
           authors: "Haoyang Wen<sup>†</sup>, <b>Jiang Guo</b>, Yi Zhang, Jiarong Jiang, Zhiguo Wang",
           links: { paper: "https://arxiv.org/pdf/2502.17957" },
-          bibtex: "@inproceedings{wen2025synthetic, title={On Synthetic Data Strategies for Domain-Specific Generative Retrieval}, author={Haoyang Wen and Jiang Guo and Yi Zhang and Jiarong Jiang and Zhiguo Wang}, booktitle={ACL}, year={2025} }"
+          bibtexKey: "wen2025synthetic"
         },
         {
           venue: "NAACL Main 2025",
           title: "You Only Read Once (YORO): Learning to Internalize Database Knowledge for Text-to-SQL",
           authors: "Hideo Kobayashi<sup>†</sup>, Wuwei Lan, Peng Shi, Shuaichen Chang, <b>Jiang Guo</b>, Henghui Zhu, Zhiguo Wang, Patrick Ng",
           links: { paper: "https://arxiv.org/pdf/2409.12172" },
-          bibtex: "@inproceedings{kobayashi2025yoro, title={You Only Read Once (YORO): Learning to Internalize Database Knowledge for Text-to-SQL}, author={Hideo Kobayashi and Wuwei Lan and Peng Shi and Shuaichen Chang and Jiang Guo and Henghui Zhu and Zhiguo Wang and Patrick Ng}, booktitle={NAACL}, year={2025} }"
+          bibtexKey: "kobayashi2025yoro"
         },
         {
           venue: "ACL Findings 2024",
           title: "Propagation and Pitfalls: Reasoning-based Assessment of Knowledge Editing through Counterfactual Tasks",
           authors: "Wenyue Hua*<sup>†</sup>, <b>Jiang Guo</b>*, Mingwen Dong, Henghui Zhu, Patrick Ng, Zhiguo Wang",
           links: { paper: "https://arxiv.org/pdf/2401.17585", code: "https://github.com/awslabs/ReCoE" },
-          bibtex: "@inproceedings{hua2024propagation, title={Propagation and Pitfalls: Reasoning-based Assessment of Knowledge Editing through Counterfactual Tasks}, author={Wenyue Hua and Jiang Guo and Mingwen Dong and Henghui Zhu and Patrick Ng and Zhiguo Wang}, booktitle={ACL Findings}, year={2024} }"
+          bibtexKey: "hua2024propagation"
         },
         {
           venue: "JCIM 2023",
           title: "RxnScribe: A Sequence Generation Model for Reaction Diagram Parsing",
           authors: "Yujie Qian, <b>Jiang Guo</b>, Zhengkai Tu, Connor W. Coley and Regina Barzilay",
           links: { paper: "https://pubs.acs.org/doi/10.1021/acs.jcim.3c00439", code: "https://github.com/thomas0809/RxnScribe", demo: "https://huggingface.co/spaces/yujieq/RxnScribe" },
-          bibtex: "@article{qian2023rxnscribe, title={RxnScribe: A Sequence Generation Model for Reaction Diagram Parsing}, author={Yujie Qian and Jiang Guo and Zhengkai Tu and Connor W. Coley and Regina Barzilay}, journal={JCIM}, year={2023} }"
+          bibtexKey: "qian2023rxnscribe"
         },
         {
           venue: "JCIM 2023",
           title: "MolScribe: Robust Molecular Structure Recognition with Image-to-Graph Generation",
           authors: "Yujie Qian, <b>Jiang Guo</b>, Zhengkai Tu, Zhening Li, Connor W. Coley and Regina Barzilay",
           links: { paper: "https://pubs.acs.org/doi/10.1021/acs.jcim.2c01480", code: "https://github.com/thomas0809/MolScribe", demo: "https://huggingface.co/spaces/yujieq/MolScribe" },
-          bibtex: "@article{qian2023molscribe, title={MolScribe: Robust Molecular Structure Recognition with Image-to-Graph Generation}, author={Yujie Qian and Jiang Guo and Zhengkai Tu and Zhening Li and Connor W. Coley and Regina Barzilay}, journal={JCIM}, year={2023} }"
+          bibtexKey: "qian2023molscribe"
         },
         {
           venue: "JCIM 2021",
           title: "Automated Chemical Reaction Extraction from Scientific Literature",
           authors: "<b>Jiang Guo</b>*, A. Santiago Ibanez-Lopez*, Hanyu Gao, Victor Quach, Connor W. Coley, Klavs F. Jensen and Regina Barzilay",
           links: { paper: "https://pubs.acs.org/doi/10.1021/acs.jcim.1c00284", code: "https://github.com/jiangfeng1124/ChemRxnExtractor", demo: "https://huggingface.co/jiangg/chembert_cased" },
-          bibtex: "@article{guo2021automated, title={Automated Chemical Reaction Extraction from Scientific Literature}, author={Jiang Guo and A. Santiago Ibanez-Lopez and Hanyu Gao and Victor Quach and Connor W. Coley and Klavs F. Jensen and Regina Barzilay}, journal={JCIM}, year={2021} }"
+          bibtexKey: "guo2021automated"
         },
         {
           venue: "Chemical Science 2021",
           title: "Evaluating and Clustering Retrosynthesis Pathways with Learned Strategy",
           authors: "Yiming Mo, Yanfei Guan, Pritha Verma, <b>Jiang Guo</b>, Mike E. Fortunato, Zhaohong Lu, Connor W. Coley and Klavs F. Jensen",
           links: { paper: "https://pubs.rsc.org/en/content/articlepdf/2021/sc/d0sc05078d", code: "https://github.com/moyiming1/Retrosynthesis-pathway-ranking" },
-          bibtex: "@article{mo2021evaluating, title={Evaluating and Clustering Retrosynthesis Pathways with Learned Strategy}, author={Yiming Mo and Yanfei Guan and Pritha Verma and Jiang Guo and Mike E. Fortunato and Zhaohong Lu and Connor W. Coley and Klavs F. Jensen}, journal={Chemical Science}, year={2021} }"
+          bibtexKey: "mo2021evaluating"
         },
         {
           venue: "EMNLP 2019",
           title: "Working Hard or Hardly Working: Challenges of Integrating Typology into Neural Dependency Parsers",
           authors: "Adam Fisch*, <b>Jiang Guo</b>* and Regina Barzilay",
           links: { paper: "https://arxiv.org/pdf/1909.09279.pdf", code: "https://github.com/ajfisch/TypologyParser" },
-          bibtex: "@inproceedings{fisch2019working, title={Working Hard or Hardly Working: Challenges of Integrating Typology into Neural Dependency Parsers}, author={Adam Fisch and Jiang Guo and Regina Barzilay}, booktitle={EMNLP}, year={2019} }"
+          bibtexKey: "fisch2019working"
         },
         {
           venue: "EMNLP 2019",
           title: "Cross-Lingual BERT Transformation for Zero-Shot Dependency Parsing",
           authors: "Yuxuan Wang<sup>†</sup>, Wanxiang Che, <b>Jiang Guo</b>, Yijia Liu and Ting Liu",
           links: { paper: "https://arxiv.org/pdf/1909.06775.pdf", code: "https://github.com/WangYuxuan93/CLBT" },
-          bibtex: "@inproceedings{wang2019cross, title={Cross-Lingual BERT Transformation for Zero-Shot Dependency Parsing}, author={Yuxuan Wang and Wanxiang Che and Jiang Guo and Yijia Liu and Ting Liu}, booktitle={EMNLP}, year={2019} }"
+          bibtexKey: "wang2019cross"
         },
         {
           venue: "NAACL 2019",
           title: "GraphIE: A Graph-Based Framework for Information Extraction",
           authors: "Yujie Qian<sup>†</sup>, Enrico Santus, Zhijing Jin<sup>†</sup>, <b>Jiang Guo</b> and Regina Barzilay",
           links: { paper: "https://arxiv.org/pdf/1810.13083.pdf", code: "https://github.com/thomas0809/GraphIE" },
-          bibtex: "@inproceedings{qian2019graphie, title={GraphIE: A Graph-Based Framework for Information Extraction}, author={Yujie Qian and Enrico Santus and Zhijing Jin and Jiang Guo and Regina Barzilay}, booktitle={NAACL}, year={2019} }"
+          bibtexKey: "qian2019graphie"
         },
         {
           venue: "EMNLP 2018",
           title: "Multi-Source Domain Adaptation with Mixture of Experts",
           authors: "<b>Jiang Guo</b>, Darsh J Shah<sup>†</sup> and Regina Barzilay",
           links: { paper: "https://arxiv.org/pdf/1809.02256.pdf", code: "https://github.com/jiangfeng1124/transfer" },
-          bibtex: "@inproceedings{guo2018multi, title={Multi-Source Domain Adaptation with Mixture of Experts}, author={Jiang Guo and Darsh J Shah and Regina Barzilay}, booktitle={EMNLP}, year={2018} }"
+          bibtexKey: "guo2018multi"
         }
       ],
       services: {
@@ -947,7 +1011,7 @@
           publisher: "Publishing House of Electronics Industry",
           year: "2025.03",
           cover: "./files/book-covers/nlp-llm-book.png",
-          links: { book: "https://item.jd.com/14395393.html", code: "https://github.com/HIT-SCIR/llm-nlp-book" }
+          links: { book: "https://item.jd.com/14395393.html", code: "https://github.com/HIT-SCIR/llm-nlp-book", frontMatter: "./files/book-front/llm-book-front-matter.pdf" }
         },
         {
           title: "Natural Language Processing: A Pre-trained Model Approach",
@@ -955,7 +1019,7 @@
           publisher: "Publishing House of Electronics Industry",
           year: "2021.07",
           cover: "./files/book-covers/nlp-plm-book.png",
-          links: { book: "https://item.jd.com/13344628.html", code: "https://github.com/HIT-SCIR/plm-nlp-code" }
+          links: { book: "https://item.jd.com/13344628.html", code: "https://github.com/HIT-SCIR/plm-nlp-code", frontMatter: "./files/book-front/ptm-book-front-matter.pdf" }
         },
         {
           title: "Neural Network Methods for Natural Language Processing",
@@ -983,20 +1047,120 @@
     document.getElementById('role').innerHTML = [SITE_DATA.person.role, SITE_DATA.person.affiliation].filter(Boolean).join(' · ');
     document.getElementById('bio-photo').src = SITE_DATA.person.bioPhoto;
 
-    // Contacts line
+    // SVG Icons
+    const ICONS = {
+      // Contact icons
+      email: `<svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>`,
+      scholar: `<svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 110-14 7 7 0 010 14zm0-24L0 9.5l4.838 3.94A8 8 0 0112 9a8 8 0 017.162 4.44L24 9.5 12 0z"/></svg>`,
+      github: `<svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>`,
+      linkedin: `<svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>`,
+      twitter: `<svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`,
+      // Button icons (for pills and book buttons)
+      paper: `<svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>`,
+      arxiv: `<svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>`,
+      code: `<svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>`,
+      data: `<svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>`,
+      demo: `<svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
+      book: `<svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>`,
+      frontMatter: `<svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>`,
+      bibtex: `<svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>`
+    };
+
+    // Contacts in sidebar (icon + text)
     const contacts = [
-      SITE_DATA.person.email && { label: 'Email', href: `mailto:${SITE_DATA.person.email}` },
-      SITE_DATA.person.scholar && { label: 'Google Scholar', href: SITE_DATA.person.scholar },
-      SITE_DATA.person.github && { label: 'GitHub', href: SITE_DATA.person.github },
-      SITE_DATA.person.linkedin && { label: 'LinkedIn', href: SITE_DATA.person.linkedin }
+      SITE_DATA.person.email && { label: 'Email', href: `mailto:${SITE_DATA.person.email}`, icon: 'email' },
+      SITE_DATA.person.scholar && { label: 'Scholar', href: SITE_DATA.person.scholar, icon: 'scholar' },
+      SITE_DATA.person.github && { label: 'GitHub', href: SITE_DATA.person.github, icon: 'github' },
+      SITE_DATA.person.linkedin && { label: 'LinkedIn', href: SITE_DATA.person.linkedin, icon: 'linkedin' }
     ].filter(Boolean);
-    document.getElementById('contacts').innerHTML = contacts.map(c => 
-      `<a href="${c.href}" target="_blank" rel="noopener">${c.label}</a>`
+    document.getElementById('sidebar-contacts').innerHTML = contacts.map(c => 
+      `<a href="${c.href}" target="_blank" rel="noopener">${ICONS[c.icon]}${c.label}</a>`
     ).join('');
+
+    // Copy to clipboard helper function
+    function copyToClipboard(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(text);
+      }
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      return Promise.resolve();
+    }
+
+    // Show toast notification
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2000);
+    }
+
+    // BibTeX cache and parser
+    let bibtexCache = null;
+
+    async function loadBibtexFile() {
+      if (bibtexCache) return bibtexCache;
+      try {
+        const response = await fetch('./files/bibs/publications.bib');
+        const text = await response.text();
+        bibtexCache = parseBibtex(text);
+        return bibtexCache;
+      } catch (error) {
+        console.error('Failed to load BibTeX file:', error);
+        return {};
+      }
+    }
+
+    function parseBibtex(text) {
+      const entries = {};
+      // Match each BibTeX entry
+      const entryRegex = /@\w+\s*\{\s*([^,]+),[\s\S]*?(?=\n@|\n*$)/g;
+      let match;
+      while ((match = entryRegex.exec(text)) !== null) {
+        const key = match[1].trim();
+        // Extract the full entry including the closing brace
+        const startIndex = match.index;
+        let braceCount = 0;
+        let endIndex = startIndex;
+        for (let i = startIndex; i < text.length; i++) {
+          if (text[i] === '{') braceCount++;
+          if (text[i] === '}') braceCount--;
+          if (braceCount === 0 && text[i] === '}') {
+            endIndex = i + 1;
+            break;
+          }
+        }
+        entries[key] = text.slice(startIndex, endIndex).trim();
+      }
+      return entries;
+    }
+
+    async function copyBibtex(key) {
+      const entries = await loadBibtexFile();
+      const bibtex = entries[key];
+      if (bibtex) {
+        copyToClipboard(bibtex).then(() => {
+          showToast('BibTeX copied to clipboard!');
+        }).catch(() => {
+          showToast('Failed to copy BibTeX');
+        });
+      } else {
+        showToast('BibTeX not found');
+      }
+    }
 
     // Publications
     const list = document.getElementById('pubs-list');
-    SITE_DATA.publications.forEach(p => {
+    SITE_DATA.publications.forEach((p, index) => {
       const li = document.createElement('li');
       li.className = 'pub-item';
       const venue = p.venue ? `<span class="muted">${p.venue}.</span> ` : '';
@@ -1010,12 +1174,24 @@
           const a = document.createElement('a');
           a.className = 'pill';
           a.href = p.links[k];
-          a.textContent = k.charAt(0).toUpperCase() + k.slice(1);
+          a.innerHTML = `${ICONS[k] || ''}${k.charAt(0).toUpperCase() + k.slice(1)}`;
           a.target = '_blank';
           a.rel = 'noopener';
           pills.appendChild(a);
         }
       });
+
+      // Add BibTeX copy button if bibtexKey exists
+      if (p.bibtexKey) {
+        const bibtexBtn = document.createElement('button');
+        bibtexBtn.className = 'pill bibtex-btn';
+        bibtexBtn.innerHTML = `${ICONS.bibtex}BibTeX`;
+        bibtexBtn.addEventListener('click', () => {
+          copyBibtex(p.bibtexKey);
+        });
+        pills.appendChild(bibtexBtn);
+      }
+
       li.appendChild(document.createElement('br'));
       li.appendChild(pills);
       list.appendChild(li);
@@ -1049,16 +1225,25 @@
           const bookLink = document.createElement('a');
           bookLink.href = book.links.book;
           bookLink.className = 'btn';
-          bookLink.textContent = 'Book';
+          bookLink.innerHTML = `${ICONS.book}Book (JD)`;
           bookLink.target = '_blank';
           bookLink.rel = 'noopener';
           links.appendChild(bookLink);
+        }
+        if (book.links.frontMatter) {
+          const frontMatterLink = document.createElement('a');
+          frontMatterLink.href = book.links.frontMatter;
+          frontMatterLink.className = 'btn';
+          frontMatterLink.innerHTML = `${ICONS.frontMatter}Front Matter`;
+          frontMatterLink.target = '_blank';
+          frontMatterLink.rel = 'noopener';
+          links.appendChild(frontMatterLink);
         }
         if (book.links.code) {
           const codeLink = document.createElement('a');
           codeLink.href = book.links.code;
           codeLink.className = 'btn';
-          codeLink.textContent = 'Code';
+          codeLink.innerHTML = `${ICONS.code}Code`;
           codeLink.target = '_blank';
           codeLink.rel = 'noopener';
           links.appendChild(codeLink);
@@ -1117,8 +1302,13 @@
       });
     }
 
-    // Load saved theme - default to light mode
-    document.documentElement.setAttribute('data-theme', 'light');
+    // Load saved theme - check localStorage first, then default to light mode
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
 
     // Navigation active state - keep clicked link active permanently
     const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
