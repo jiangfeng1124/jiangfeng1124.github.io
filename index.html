@@ -10,11 +10,11 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" id="og-title" content="Academic Homepage" />
   <meta property="og:description" id="og-description" content="Research on LLMs, RAG, agents, and applied NLP." />
-  <meta property="og:image" content="/assets/og-image.jpg" />
+  <meta property="og:image" content="./files/bio-photo4.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="canonical" id="canonical" href="" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>📄</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%233b82f6'/><text x='50' y='54' font-family='system-ui,sans-serif' font-size='48' font-weight='700' fill='white' text-anchor='middle' dominant-baseline='central'>JG</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -30,7 +30,7 @@
       --accent: #f7f2ec; /* warm cream accent */
       --border: #ddd5cb; /* warm gray border */
       --sidebar-width: 280px;
-      --sidebar-bg: rgba(255, 250, 245, 0.92);
+      --sidebar-bg: rgba(250, 247, 242, 0.92);
       --sidebar-shadow: rgba(0, 0, 0, 0.04);
     }
     @media (prefers-color-scheme: dark) {
@@ -40,10 +40,10 @@
         --muted:#94a3b8; 
         --link:#60a5fa; 
         --link-hover:#3b82f6;
-        --rule:#1e293b; 
-        --accent:#1e293b;
-        --border:#334155;
-        --sidebar-bg: rgba(15, 23, 42, 0.95);
+        --rule:#2e2b26; 
+        --accent:#24211c;
+        --border:#3a362f;
+        --sidebar-bg: rgba(26, 25, 22, 0.95);
         --sidebar-shadow: rgba(0, 0, 0, 0.3);
       }
     }
@@ -56,7 +56,7 @@
       --rule: #e8e0d8; 
       --accent: #f7f2ec;
       --border: #ddd5cb;
-      --sidebar-bg: rgba(255, 250, 245, 0.92);
+      --sidebar-bg: rgba(250, 247, 242, 0.92);
       --sidebar-shadow: rgba(0, 0, 0, 0.04);
     }
     [data-theme="dark"] { 
@@ -65,10 +65,10 @@
       --muted:#94a3b8; 
       --link:#60a5fa; 
       --link-hover:#3b82f6;
-      --rule:#1e293b; 
-      --accent:#1e293b;
-      --border:#334155;
-      --sidebar-bg: rgba(15, 23, 42, 0.95);
+      --rule:#2e2b26; 
+      --accent:#24211c;
+      --border:#3a362f;
+      --sidebar-bg: rgba(26, 25, 22, 0.95);
       --sidebar-shadow: rgba(0, 0, 0, 0.3);
     }
 
@@ -513,17 +513,18 @@
     }
 
     .btn {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
       border: 1px solid var(--border);
       padding: 4px 12px;
       border-radius: 6px;
       text-decoration: none;
       font-size: 0.9rem;
       font-weight: 500;
-      background: var(--bg);
+      background: var(--accent);
       color: var(--text);
       transition: all 0.2s ease;
-      background-color: var(--accent);
     }
 
     .btn:hover {
@@ -579,17 +580,19 @@
     }
 
     .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
       border: 1px solid var(--border);
       border-radius: 6px;
       padding: 4px 8px;
       font-size: 0.85rem;
       text-decoration: none;
       font-weight: 500;
-      background: var(--bg);
+      background: var(--accent);
       color: var(--text);
       transition: all 0.2s ease;
       margin-top: 4px;
-      background-color: var(--accent);
     }
 
     .pill:hover {
@@ -599,22 +602,10 @@
       text-decoration: none;
     }
 
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
     .btn-icon {
       width: 14px;
       height: 14px;
       flex-shrink: 0;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
     }
 
     .btn .btn-icon {
@@ -858,9 +849,11 @@
           <h2 id="about-title">About Me</h2>
           <div class="about-grid">
             <div>
-              <p>I am currently a Senior Applied Scientist at <a href="https://aws.amazon.com/ai/agentic-ai/">AWS Agentic AI</a> working on large language models (LLMs) and agentic AI. Previously, I was a Postdoctoral researcher at <a href="https://www.csail.mit.edu/">MIT CSAIL</a>, working with <a href="https://www.regina.csail.mit.edu/">Regina Barzilay</a> on AI for chemical sciences. I started my academic journey on NLP from <a href="http://ir.hit.edu.cn/">HIT SCIR</a>, under the supervision of <a href="https://haifengwang.net/">Haifeng Wang</a> and <a href="https://chewanxiang.com/">Wanxiang Che</a>, and was a visiting student at Johns Hopkins University, advised by <a href="http://www.cs.jhu.edu/~yarowsky/">David Yarowsky</a>.</p>
-              
-              <p>My research interests span a broad spectrum of topics in natural language processing (NLP) and machine learning. My recent work includes:</p>
+              <p>I am a Senior Applied Scientist at <a href="https://aws.amazon.com/ai/agentic-ai/">AWS Agentic AI</a>, working on large language models (LLMs) and agentic AI. I build systems that enable language models to acquire and internalize knowledge, reason faithfully, and act as autonomous agents.</p>
+
+              <p>Previously, I was a Postdoctoral researcher at <a href="https://www.csail.mit.edu/">MIT CSAIL</a> with <a href="https://www.regina.csail.mit.edu/">Regina Barzilay</a>, focusing on AI for chemical sciences. I received my Ph.D. from <a href="http://ir.hit.edu.cn/">HIT SCIR</a>, advised by <a href="https://haifengwang.net/">Haifeng Wang</a> and <a href="https://chewanxiang.com/">Wanxiang Che</a>, and was a visiting student at Johns Hopkins University with <a href="http://www.cs.jhu.edu/~yarowsky/">David Yarowsky</a>.</p>
+
+              <p>My recent work includes:</p>
               
               <ul class="focus-list">
                 <li><b>Post-Training</b> — <a href="https://aws.amazon.com/bedrock/amazon-models/titan/">Amazon Titan LLMs</a></li>
@@ -883,7 +876,7 @@
 
         <section id="books" aria-labelledby="books-title">
           <h2 id="books-title">Books</h2>
-          <ul id="books-list" class="meta"></ul>
+          <div id="books-list" class="meta"></div>
         </section>
 
         <section id="services" aria-labelledby="services-title">
@@ -1217,10 +1210,9 @@
     // Books
     const booksList = document.getElementById('books-list');
     SITE_DATA.books.forEach(book => {
-      const li = document.createElement('li');
-      li.className = 'book-grid';
+      const card = document.createElement('div');
+      card.className = 'book-grid';
 
-      // Create book cover
       const coverDiv = document.createElement('div');
       const coverImg = document.createElement('img');
       coverImg.src = book.cover;
@@ -1229,12 +1221,10 @@
       coverImg.loading = 'lazy';
       coverDiv.appendChild(coverImg);
 
-      // Create book info
       const infoDiv = document.createElement('div');
       infoDiv.className = 'book-info';
       infoDiv.innerHTML = `<strong>${book.title}</strong><br>${book.authors}<br>${book.publisher}, ${book.year}`;
 
-      // Add links if they exist
       if (book.links) {
         const links = document.createElement('div');
         links.className = 'cta-row';
@@ -1268,9 +1258,9 @@
         infoDiv.appendChild(links);
       }
 
-      li.appendChild(coverDiv);
-      li.appendChild(infoDiv);
-      booksList.appendChild(li);
+      card.appendChild(coverDiv);
+      card.appendChild(infoDiv);
+      booksList.appendChild(card);
     });
 
     // Services
@@ -1338,9 +1328,6 @@
         e.preventDefault();
         e.stopPropagation();
         
-        console.log('Link clicked:', this.getAttribute('href'));
-        
-        // Set clicked link
         clickedLink = this.getAttribute('href');
         
         // Remove active from all links
@@ -1350,8 +1337,7 @@
         
         // Add active to clicked link
         this.classList.add('active');
-        console.log('Active class added, clickedLink:', clickedLink);
-        
+
         // Scroll to the section
         const targetSection = document.querySelector(clickedLink);
         if (targetSection) {
@@ -1368,12 +1354,10 @@
     function updateActiveNav() {
       // If a link was clicked, ALWAYS keep it active - this should never be overridden
       if (clickedLink) {
-        console.log('updateActiveNav: clickedLink is set, keeping active:', clickedLink);
         navLinks.forEach(link => {
           const href = link.getAttribute('href');
           if (href === clickedLink) {
             link.classList.add('active');
-            console.log('Keeping active:', href);
           } else {
             link.classList.remove('active');
           }
@@ -1403,7 +1387,6 @@
     window.addEventListener('scroll', () => {
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
-        console.log('Scroll event fired, clickedLink:', clickedLink);
         updateActiveNav();
       }, 100);
     }, { passive: true });
