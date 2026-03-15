@@ -1,0 +1,13 @@
+<svg width="150" height="200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="150" height="200" fill="#dc2626" rx="4"/>
+  <rect x="10" y="10" width="130" height="180" fill="#ffffff" rx="2"/>
+  <text x="75" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#dc2626">Neural Network</text>
+  <text x="75" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#dc2626">Methods for</text>
+  <text x="75" y="75" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#dc2626">Natural Language</text>
+  <text x="75" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#dc2626">Processing</text>
+  <text x="75" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#666">Yoav Goldberg</text>
+  <text x="75" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#999">Translated by:</text>
+  <text x="75" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#666">Wanxiang Che, Jiang Guo</text>
+  <text x="75" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#666">Weinan Zhang, Ming Liu</text>
+  <text x="75" y="185" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#999">2018</text>
+</svg>

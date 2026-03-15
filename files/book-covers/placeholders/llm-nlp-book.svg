@@ -1,0 +1,12 @@
+<svg width="150" height="200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="150" height="200" fill="#2563eb" rx="4"/>
+  <rect x="10" y="10" width="130" height="180" fill="#ffffff" rx="2"/>
+  <text x="75" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#2563eb">Natural Language</text>
+  <text x="75" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#2563eb">Processing:</text>
+  <text x="75" y="85" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#2563eb">A Large Language</text>
+  <text x="75" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#2563eb">Model Approach</text>
+  <text x="75" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#666">Wanxiang Che</text>
+  <text x="75" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#666">Jiang Guo</text>
+  <text x="75" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#666">Yiming Cui</text>
+  <text x="75" y="185" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#999">2025</text>
+</svg>

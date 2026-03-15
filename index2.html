@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title id="meta-title">Researcher Homepage</title>
+  <meta name="description" id="meta-description" content="Research on LLMs, RAG, agents, and applied NLP. Publications, projects, and contact." />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" id="og-title" content="Researcher Homepage" />
+  <meta property="og:description" id="og-description" content="Research on LLMs, RAG, agents, and applied NLP." />
+  <meta property="og:image" content="/assets/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="canonical" id="canonical" href="" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🧠</text></svg>">
+
+  <style>
+    :root {
+      --bg: #0b0d12;
+      --card: #12151d;
+      --text: #e9eef7;
+      --muted: #9aa4b2;
+      --brand: #7cb7ff;
+      --accent: #a5f3fc;
+      --badge: #1e293b;
+      --link: #93c5fd;
+      --success: #22c55e;
+      --shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+    @media (prefers-color-scheme: light) {
+      :root { --bg:#f7fafc; --card:#ffffff; --text:#0f172a; --muted:#475569; --badge:#e2e8f0; --link:#1d4ed8; }
+    }
+    [data-theme="light"] { --bg:#f7fafc; --card:#ffffff; --text:#0f172a; --muted:#475569; --badge:#e2e8f0; --link:#1d4ed8; }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { margin:0; font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; background: var(--bg); color: var(--text); }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    header.site { position: sticky; top:0; z-index: 50; backdrop-filter: blur(8px); background: color-mix(in oklab, var(--bg) 85%, transparent); border-bottom: 1px solid color-mix(in oklab, var(--muted) 30%, transparent); }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0; }
+    .brand { display:flex; align-items:center; gap:12px; font-weight:700; }
+    .brand img { width:44px; height:44px; border-radius: 50%; object-fit: cover; box-shadow: var(--shadow); }
+    .brand .role { color: var(--muted); font-weight: 500; font-size: 0.95rem; }
+
+    .nav a.btn, button.btn { display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius: 999px; background: var(--card); border:1px solid color-mix(in oklab, var(--muted) 25%, transparent); color: var(--text); text-decoration:none; box-shadow: var(--shadow); }
+    .nav a.btn:hover, button.btn:hover { transform: translateY(-1px); }
+    .nav-links { display:flex; gap:10px; flex-wrap: wrap; }
+
+    .hero { display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 28px; padding: 36px 0 8px; align-items: center; }
+    .hero-card { background: var(--card); border:1px solid color-mix(in oklab, var(--muted) 25%, transparent); border-radius: 20px; padding: 22px; box-shadow: var(--shadow); }
+    .tagline { color: var(--muted); margin-top: 6px; }
+    .cta { margin-top: 16px; display:flex; gap:10px; flex-wrap: wrap; }
+
+    .strip { display:flex; gap:14px; flex-wrap: wrap; align-items:center; color:var(--muted); }
+    .strip a { background: var(--badge); padding:6px 10px; border-radius:10px; color:var(--text); }
+
+    .section { padding: 34px 0; }
+    .grid { display:grid; gap: 16px; }
+    .grid.cards { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+    .card { background: var(--card); border:1px solid color-mix(in oklab, var(--muted) 25%, transparent); border-radius: 18px; padding: 18px; box-shadow: var(--shadow); }
+    .card h3 { margin: 4px 0 6px; }
+    .meta { color: var(--muted); font-size: 0.92rem; }
+
+    .badge { display:inline-block; padding:3px 8px; border-radius:999px; background: var(--badge); font-size: 0.8rem; margin-right:6px; white-space:nowrap; }
+    .venue { font-weight:600; }
+
+    .pub { display:grid; gap:6px; }
+    .pub .title { font-weight:700; }
+    .pub .authors b { font-weight:800; }
+    .actions { display:flex; flex-wrap:wrap; gap:8px; margin-top: 6px; }
+    .pill { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius: 999px; border:1px solid color-mix(in oklab, var(--muted) 25%, transparent); background: transparent; color: var(--text); text-decoration:none; }
+    .pill:hover { background: color-mix(in oklab, var(--badge) 60%, transparent); text-decoration:none; }
+
+    .twocol { display:grid; grid-template-columns: 1fr 320px; gap:20px; align-items:start; }
+    @media (max-width: 900px) { .hero{grid-template-columns:1fr;} .twocol{grid-template-columns:1fr;} }
+
+    .news li { margin-bottom: 10px; }
+
+    footer { padding: 26px 0 40px; color: var(--muted); border-top:1px dashed color-mix(in oklab, var(--muted) 25%, transparent); }
+
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
+  </style>
+</head>
+<body>
+  <a href="#content" class="sr-only">Skip to content</a>
+  <header class="site">
+    <div class="container nav">
+      <div class="brand">
+        <img id="avatar" src="/assets/headshot.jpg" alt="Headshot" loading="lazy" width="88" height="88" />
+        <div>
+          <div id="name" style="font-size:1.15rem"></div>
+          <div id="role" class="role"></div>
+        </div>
+      </div>
+      <nav class="nav-links" aria-label="Primary">
+        <a class="btn" href="#projects">Featured</a>
+        <a class="btn" href="#publications">Publications</a>
+        <a class="btn" href="#services">Services</a>
+        <a class="btn" href="#news">News</a>
+        <button class="btn" id="themeToggle" aria-pressed="false" aria-label="Toggle dark mode">🌓 Theme</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content" class="container">
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-card">
+        <h1 id="hero-title" style="margin:0"></h1>
+        <p class="tagline" id="tagline"></p>
+        <div class="cta">
+          <a class="btn" href="#publications">📚 Selected papers</a>
+          <a class="btn" id="cv-link" href="#" target="_blank" rel="noopener">📄 CV</a>
+        </div>
+        <div class="strip" style="margin-top:16px" id="contact-strip"></div>
+      </div>
+      <div class="hero-card">
+        <h2 style="margin:0 0 4px">At a glance</h2>
+        <ul class="meta" id="at-a-glance" style="padding-left: 18px; margin: 8px 0 0"></ul>
+      </div>
+    </section>
+
+    <!-- FEATURED PROJECTS -->
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <h2 id="projects-title">Featured work</h2>
+      <div class="grid cards" id="featured-grid"></div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section class="section" id="publications" aria-labelledby="pubs-title">
+      <h2 id="pubs-title">Publications</h2>
+      <p class="meta">Newest first. Pre-2019 collapsed. Click <em>Show more</em> to expand.</p>
+      <div id="pubs-list" class="grid"></div>
+      <div style="margin-top:10px">
+        <button class="btn" id="toggle-older">Show more</button>
+        <a class="btn" id="bibtex-all" href="#">Download .bib</a>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section" id="services" aria-labelledby="services-title">
+      <h2 id="services-title">Services</h2>
+      <div class="twocol">
+        <div class="card">
+          <h3>Academic</h3>
+          <ul class="meta" id="svc-academic"></ul>
+        </div>
+        <div class="card">
+          <h3>Industry</h3>
+          <ul class="meta" id="svc-industry"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWS / TALKS -->
+    <section class="section" id="news" aria-labelledby="news-title">
+      <h2 id="news-title">News & Talks</h2>
+      <div class="twocol">
+        <div class="card">
+          <ul class="news" id="news-list"></ul>
+        </div>
+        <aside class="card">
+          <h3>Contact</h3>
+          <div id="contact-side"></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <small>Last updated <time id="last-updated"></time> · © <span id="copyright-year"></span> <span id="name-footer"></span></small>
+    </div>
+  </footer>
+
+  <!-- Schema.org JSON-LD (Person + one example paper). These are hydrated from SITE_DATA below. -->
+  <script id="schema-person" type="application/ld+json"></script>
+  <script id="schema-article" type="application/ld+json"></script>
+
+  <!-- ======= DATA: edit this block to update your site content ======= -->
+  <script>
+    const SITE_DATA = {
+      person: {
+        name: "Your Name",
+        nativeName: "",
+        role: "Applied Scientist",
+        affiliation: "",
+        location: "",
+        email: "you@example.com",
+        avatar: "/assets/headshot.jpg",
+        scholar: "https://scholar.google.com/",
+        github: "https://github.com/",
+        x: "https://x.com/",
+        linkedin: "https://www.linkedin.com/",
+        cv: "#"
+      },
+      tagline: "Research on LLMs, RAG, agents, and text-to-SQL for real products.",
+      glance: [
+        "LLM/RAG/Agents; applied NLP at scale",
+        "Publications at ACL/EMNLP/NAACL",
+        "Open-source datasets: ReCoE",
+        "Industry systems: Bedrock RAG, AgentCore"
+      ],
+      featured: [
+        {
+          title: "YORO: Yet One-stage Referring Object (example)",
+          badges: ["Project", "2025"],
+          blurb: "Lightweight one-stage model for referring object detection with strong real-time performance.",
+          links: { demo: "#", code: "#", paper: "#" }
+        },
+        {
+          title: "ReCoE: A Retrieval Corpus for Evaluation",
+          badges: ["Dataset", "2025"],
+          blurb: "Open benchmark for retrieval-augmented generation with high-quality annotations.",
+          links: { site: "#", data: "#", paper: "#" }
+        },
+        {
+          title: "AgentCore + Bedrock (case study)",
+          badges: ["System", "Industry"],
+          blurb: "Two-stage RAG with generative retrieval and tool-using agents for enterprise search.",
+          links: { blog: "#", slides: "#" }
+        }
+      ],
+      publications: [
+        {
+          year: 2025,
+          venue: "ACL",
+          title: "Title of Your 2025 ACL Paper",
+          authors: "First Author, <b>Your Name</b>, Third Author",
+          links: { pdf: "#", arxiv: "#", code: "#", data: "#", demo: "#" },
+          bibtex: "@inproceedings{your2025acl,\n  title={Title of Your 2025 ACL Paper},\n  author={First Author and Your Name and Third Author},\n  booktitle={ACL},\n  year={2025}\n}"
+        },
+        {
+          year: 2025,
+          venue: "NAACL",
+          title: "Title of Your 2025 NAACL Paper",
+          authors: "<b>Your Name</b>, Coauthor",
+          links: { pdf: "#", arxiv: "#", code: "#", data: "#" },
+          bibtex: "@inproceedings{your2025naacl,\n  title={Title of Your 2025 NAACL Paper},\n  author={Your Name and Coauthor},\n  booktitle={NAACL},\n  year={2025}\n}"
+        },
+        {
+          year: 2023,
+          venue: "EMNLP",
+          title: "An Earlier Paper Title",
+          authors: "A. Author, <b>Your Name</b>",
+          links: { pdf: "#" },
+          bibtex: "@inproceedings{earlier2023, title={An Earlier Paper Title}, author={A. Author and Your Name}, booktitle={EMNLP}, year={2023} }",
+          older: false
+        },
+        {
+          year: 2018,
+          venue: "ACL",
+          title: "Legacy Work Example",
+          authors: "<b>Your Name</b>, Others",
+          links: { pdf: "#" },
+          bibtex: "@inproceedings{legacy2018, title={Legacy Work Example}, author={Your Name and Others}, booktitle={ACL}, year={2018} }",
+          older: true
+        }
+      ],
+      services: {
+        academic: [
+          "Area Chair / Senior PC: ACL, EMNLP, NAACL",
+          "Reviewer: TACL, ARR, NeurIPS",
+          "Workshop organizer: RAG & Agents"
+        ],
+        industry: [
+          "Product: enterprise RAG on Bedrock",
+          "Standardization: evaluation guidelines",
+          "Advising: ML for search & Q/A"
+        ]
+      },
+      news: [
+        { date: "2025-08-30", text: "Two papers accepted to ACL 2025." },
+        { date: "2025-07-12", text: "Released ReCoE v1.0 dataset." },
+        { date: "2025-06-05", text: "Invited talk on Agentic RAG at Company X." }
+      ]
+    };
+  </script>
+
+  <!-- ======= RENDERER: JS that builds the page from SITE_DATA ======= -->
+  <script>
+    // Helper: format date
+    const fmtDate = iso => new Date(iso).toLocaleDateString(undefined, { year:'numeric', month:'short', day:'numeric' });
+
+    // Populate meta
+    const titleText = `${SITE_DATA.person.name} — ${SITE_DATA.person.role}`;
+    document.getElementById('meta-title').textContent = titleText;
+    document.getElementById('og-title').setAttribute('content', titleText);
+    document.getElementById('meta-description').setAttribute('content', SITE_DATA.tagline);
+    document.getElementById('og-description').setAttribute('content', SITE_DATA.tagline);
+    document.getElementById('canonical').href = location.href;
+
+    // Header
+    document.getElementById('avatar').src = SITE_DATA.person.avatar;
+    document.getElementById('name').textContent = SITE_DATA.person.name + (SITE_DATA.person.nativeName? ` (${SITE_DATA.person.nativeName})` : '');
+    document.getElementById('role').textContent = SITE_DATA.person.role + (SITE_DATA.person.affiliation? ` · ${SITE_DATA.person.affiliation}` : '');
+
+    // Hero
+    document.getElementById('hero-title').textContent = SITE_DATA.person.name;
+    document.getElementById('tagline').textContent = SITE_DATA.tagline;
+    document.getElementById('cv-link').href = SITE_DATA.person.cv;
+
+    // Contact strip
+    const strip = document.getElementById('contact-strip');
+    const side = document.getElementById('contact-side');
+    const contactLinks = [
+      SITE_DATA.person.email && { label: SITE_DATA.person.email, href: `mailto:${SITE_DATA.person.email}` },
+      SITE_DATA.person.scholar && { label: 'Google Scholar', href: SITE_DATA.person.scholar },
+      SITE_DATA.person.github && { label: 'GitHub', href: SITE_DATA.person.github },
+      SITE_DATA.person.x && { label: 'X/Twitter', href: SITE_DATA.person.x },
+      SITE_DATA.person.linkedin && { label: 'LinkedIn', href: SITE_DATA.person.linkedin }
+    ].filter(Boolean);
+    for (const l of contactLinks) {
+      const a = document.createElement('a'); a.href = l.href; a.textContent = l.label; a.rel='me noopener'; a.target='_blank'; strip.appendChild(a.cloneNode(true)); side.appendChild(a);
+    }
+
+    // At a glance
+    const glance = document.getElementById('at-a-glance');
+    SITE_DATA.glance.forEach(t => { const li = document.createElement('li'); li.textContent = t; glance.appendChild(li); });
+
+    // Featured
+    const feat = document.getElementById('featured-grid');
+    SITE_DATA.featured.forEach(p => {
+      const card = document.createElement('article'); card.className = 'card';
+      const badgeRow = p.badges.map(b => `<span class="badge">${b}</span>`).join(' ');
+      card.innerHTML = `<div>${badgeRow}</div><h3>${p.title}</h3><p class="meta">${p.blurb}</p>`;
+      const actions = document.createElement('div'); actions.className = 'actions';
+      Object.entries(p.links).forEach(([k, v]) => { const a = document.createElement('a'); a.className='pill'; a.href=v; a.textContent=k; a.target='_blank'; a.rel='noopener'; actions.appendChild(a); });
+      card.appendChild(actions); feat.appendChild(card);
+    });
+
+    // Publications (group by year)
+    const pubs = [...SITE_DATA.publications].sort((a,b)=> b.year - a.year);
+    const list = document.getElementById('pubs-list');
+    let currentYear = null; const olderContainer = document.createElement('div'); olderContainer.style.display='none';
+    pubs.forEach((p, idx) => {
+      if (p.year !== currentYear) {
+        currentYear = p.year;
+        const h = document.createElement('h3'); h.textContent = currentYear; list.appendChild(h);
+      }
+      const item = document.createElement('article'); item.className = 'card pub';
+      const badges = `<span class="badge venue">${p.venue} ’${String(p.year).slice(2)}</span>`;
+      item.innerHTML = `${badges}<div class="title">${p.title}</div><div class="authors">${p.authors}</div>`;
+      const actions = document.createElement('div'); actions.className = 'actions';
+      const linkOrder = ['pdf','arxiv','code','data','demo'];
+      linkOrder.forEach(k => { if (p.links && p.links[k]) { const a = document.createElement('a'); a.className='pill'; a.href=p.links[k]; a.target='_blank'; a.rel='noopener'; a.textContent = k.toUpperCase(); actions.appendChild(a); }});
+      const copy = document.createElement('button'); copy.className='pill'; copy.type='button'; copy.textContent='BibTeX'; copy.addEventListener('click', ()=> { navigator.clipboard.writeText(p.bibtex); copy.textContent='Copied ✓'; setTimeout(()=> copy.textContent='BibTeX', 1500); }); actions.appendChild(copy);
+      item.appendChild(actions);
+      if (p.older) olderContainer.appendChild(item); else list.appendChild(item);
+    });
+    list.appendChild(olderContainer);
+
+    // Toggle older
+    document.getElementById('toggle-older').addEventListener('click', (e)=>{
+      const open = olderContainer.style.display !== 'none';
+      olderContainer.style.display = open ? 'none' : 'grid';
+      e.target.textContent = open ? 'Show more' : 'Show less';
+    });
+
+    // Services
+    const ulA = document.getElementById('svc-academic');
+    SITE_DATA.services.academic.forEach(s => { const li = document.createElement('li'); li.textContent = s; ulA.appendChild(li); });
+    const ulI = document.getElementById('svc-industry');
+    SITE_DATA.services.industry.forEach(s => { const li = document.createElement('li'); li.textContent = s; ulI.appendChild(li); });
+
+    // News
+    const news = document.getElementById('news-list');
+    SITE_DATA.news.sort((a,b)=> new Date(b.date) - new Date(a.date)).forEach(n => { const li = document.createElement('li'); li.innerHTML = `<span class="badge">${fmtDate(n.date)}</span> ${n.text}`; news.appendChild(li); });
+
+    // Footer dates
+    const now = new Date();
+    document.getElementById('last-updated').textContent = now.toLocaleDateString(undefined, { year:'numeric', month:'short', day:'numeric' });
+    document.getElementById('copyright-year').textContent = now.getFullYear();
+    document.getElementById('name-footer').textContent = SITE_DATA.person.name;
+
+    // Theme toggle
+    const toggle = document.getElementById('themeToggle');
+    const applyTheme = t => { if (t) { document.documentElement.setAttribute('data-theme', t); localStorage.setItem('theme', t); toggle.setAttribute('aria-pressed', t==='light'); } else { document.documentElement.removeAttribute('data-theme'); localStorage.removeItem('theme'); toggle.setAttribute('aria-pressed','false'); } };
+    const saved = localStorage.getItem('theme'); if (saved) applyTheme(saved);
+    toggle.addEventListener('click', ()=> { const cur = document.documentElement.getAttribute('data-theme'); applyTheme(cur==='light'? null : 'light'); });
+
+    // .bib for all
+    document.getElementById('bibtex-all').addEventListener('click', (e)=>{
+      e.preventDefault();
+      const blob = new Blob(SITE_DATA.publications.map(p=>p.bibtex).join('\n\n'), { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href=url; a.download='publications.bib'; a.click(); setTimeout(()=> URL.revokeObjectURL(url), 1000);
+    });
+
+    // JSON-LD
+    const sameAs = [SITE_DATA.person.github, SITE_DATA.person.scholar, SITE_DATA.person.linkedin, SITE_DATA.person.x].filter(Boolean);
+    document.getElementById('schema-person').textContent = JSON.stringify({
+      '@context':'https://schema.org', '@type':'Person', name: SITE_DATA.person.name, jobTitle: SITE_DATA.person.role, affiliation: SITE_DATA.person.affiliation || undefined, email: SITE_DATA.person.email ? `mailto:${SITE_DATA.person.email}` : undefined, image: SITE_DATA.person.avatar, sameAs
+    });
+    const firstPaper = SITE_DATA.publications.find(p=>!p.older) || SITE_DATA.publications[0];
+    if (firstPaper) {
+      document.getElementById('schema-article').textContent = JSON.stringify({
+        '@context':'https://schema.org', '@type':'ScholarlyArticle', name:firstPaper.title, author:firstPaper.authors.replace(/<[^>]+>/g,'').split(',').map(n=>({ '@type':'Person', name:n.trim() })), datePublished: `${firstPaper.year}-01-01`, isPartOf: { '@type':'PublicationVolume', name:firstPaper.venue }, url: firstPaper.links?.pdf || firstPaper.links?.arxiv || location.href
+      });
+    }
+  </script>
+</body>
+</html>
